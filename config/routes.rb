@@ -17,6 +17,9 @@ Sentrino::Application.routes.draw do
   
 	root :to => "home#index"
 
+  resources :index
+  resources :application
+
   # Sample resource route with options:
   #   resources :products do
   #     member do
