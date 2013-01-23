@@ -19,6 +19,7 @@ Sentrino::Application.routes.draw do
 
   resources :index
   resources :application
+  resources :user
 
   # Sample resource route with options:
   #   resources :products do
