@@ -1,7 +1,3 @@
 class Task < ActiveRecord::Base
-  attr_accessible :nickname
-  belongs_to :device
-  has_one :tasktype
-  
-  
+	has_one :action
 end

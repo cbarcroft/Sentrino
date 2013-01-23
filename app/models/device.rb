@@ -1,7 +1,7 @@
 class Device < ActiveRecord::Base
   attr_accessible :id, :nickname, :model, :ip
   
-  has_many :tasks
+  has_many :actions
  
   validates :model,  :presence => true
   validates :ip, :presence => true,
