@@ -1,4 +1,6 @@
 Sentrino::Application.routes.draw do
+  devise_for :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -12,6 +14,11 @@ Sentrino::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  
+	root :to => "home#index"
+
+  resources :index
+  resources :application
 
   # Sample resource route with options:
   #   resources :products do
