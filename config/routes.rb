@@ -19,7 +19,7 @@ Sentrino::Application.routes.draw do
 
   resources :index
   resources :application
-  resources :user
+  devise_for :users
 
   # Sample resource route with options:
   #   resources :products do
