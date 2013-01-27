@@ -19,7 +19,16 @@ Sentrino::Application.routes.draw do
 
   resources :index
   resources :application
-  devise_for :users
+  resources :device
+
+  #match '/dashboard' => 'home#dashboard', :as => 'user_root'
+
+  devise_for :users, :path => '', :path_names => {
+    :sign_in => "sign_in",
+    :sign_out => "logout",
+    :sign_up => "sign_up",
+    :password => "password"
+  }
 
   # Sample resource route with options:
   #   resources :products do

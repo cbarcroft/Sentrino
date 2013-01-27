@@ -2,9 +2,8 @@
 	<div class="navbar-inner">
 		<ul class="nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#">About Sentrino</a></li>
 			<li>
-				<%=user_signed_in? ? link_to('Logout', destroy_user_session_path, :method=>'delete') : link_to("Sign in/Create Account", "users/sign_in")%>
+				<%= user_signed_in? ? link_to('Logout', destroy_user_session_path, :method=>'delete') : link_to("Sign in/Create Account", "sign_in") %>
 			</li>
 		</ul>
 	</div>
