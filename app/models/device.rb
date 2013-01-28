@@ -1,7 +1,7 @@
 class Device < ActiveRecord::Base
   attr_accessible :id, :nickname, :model, :ip
   
-  has_many :actions
+  has_many :device_actions
   belongs_to :user
  
   validates :model,  :presence => true

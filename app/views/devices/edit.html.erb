@@ -1,6 +1,9 @@
-<h1>Editing device</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @device %> |
-<%= link_to 'Back', devices_path %>
+<section class="container">
+	<h1>Editing device</h1>
+	
+	<%= render 'form' %>
+	
+	<br />
+	<%= link_to 'Destroy', @device, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
+	<%= link_to 'Back', "/", :class=>"btn" %>
+</section>

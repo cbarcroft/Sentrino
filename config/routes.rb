@@ -24,12 +24,12 @@ Sentrino::Application.routes.draw do
 
   #match '/dashboard' => 'home#dashboard', :as => 'user_root'
 
-  devise_for :users, :path => '', :path_names => {
-    :sign_in => "sign_in",
-    :sign_out => "logout",
-    :sign_up => "sign_up",
-    :password => "password"
-  }
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign_in' => 'devise/sessions#create', :as => :user_session
+    delete 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
 
   # Sample resource route with options:
   #   resources :products do

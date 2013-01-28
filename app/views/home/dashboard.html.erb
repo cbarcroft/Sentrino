@@ -1,1 +1,7 @@
-<h1>LOGGED IN</h1>
+<section class="container">
+	<h1>Welcome, <%= current_user.email %>!</h1>
+	<h2>Your devices</h2>
+	<%= render :template => "devices/index" %>
+	
+	<%= link_to 'Add a Device', new_device_path, :class => "btn btn-primary btn-large" %>
+</section>

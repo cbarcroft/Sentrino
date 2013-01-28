@@ -1,29 +1,25 @@
-<h1>Listing devices</h1>
-
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Nickname</th>
-    <th>Model</th>
-    <th>Ip</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @devices.each do |device| %>
-  <tr>
-    <td><%= device.id %></td>
-    <td><%= device.nickname %></td>
-    <td><%= device.model %></td>
-    <td><%= device.ip %></td>
-    <td><%= link_to 'Show', device %></td>
-    <td><%= link_to 'Edit', edit_device_path(device) %></td>
-    <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Device', new_device_path %>
+<div class="row">
+  <% @devices.each do |device| %>
+  <div class="span4 device-list">
+    <h3><%= device.nickname %></h3>
+    <p>
+      <b>Id:</b>
+      <%= device.id %>
+    </p>
+    
+    <p>
+      <b>Model:</b>
+      <%= device.model %>
+    </p>
+    
+    <p>
+      <b>Ip:</b>
+      <%= device.ip %>
+    </p>
+    <p>
+      <%= link_to 'Edit', edit_device_path(device), :class => "btn" %>
+      <%= link_to 'Show', device, :class => "btn" %>
+    </p>
+  </div>
+  <% end %>
+</div>
