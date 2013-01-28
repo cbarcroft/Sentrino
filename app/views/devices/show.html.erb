@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @device.id %>
+</p>
+
+<p>
+  <b>Nickname:</b>
+  <%= @device.nickname %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%= @device.model %>
+</p>
+
+<p>
+  <b>Ip:</b>
+  <%= @device.ip %>
+</p>
+
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>
