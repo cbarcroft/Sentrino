@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nickname: MyString
+  actiontype_id: 1
+  device_id: 1
+
+two:
+  nickname: MyString
+  actiontype_id: 1
+  device_id: 1
