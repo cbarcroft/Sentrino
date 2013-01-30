@@ -1,5 +1,5 @@
 class Device < ActiveRecord::Base
-  attr_accessible :id, :nickname, :model, :ip
+  attr_accessible :nickname, :model, :ip, :user_id
   
   has_many :device_actions
   belongs_to :user

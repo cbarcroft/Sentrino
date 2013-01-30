@@ -1,8 +1,10 @@
 class DevicesController < ApplicationController
+  before_filter :find_device, :only => [:show, :edit, :update, :destroy]
+  
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.all
+    @devices = current_user.devices
 
     respond_to do |format|
       format.html # index.html.erb
@@ -56,8 +58,6 @@ class DevicesController < ApplicationController
   # PUT /devices/1
   # PUT /devices/1.json
   def update
-    @device = Device.find(params[:id])
-
     respond_to do |format|
       if @device.update_attributes(params[:device])
         format.html { redirect_to @device, notice: 'Device was successfully updated.' }
@@ -72,7 +72,6 @@ class DevicesController < ApplicationController
   # DELETE /devices/1
   # DELETE /devices/1.json
   def destroy
-    @device = Device.find(params[:id])
     @device.destroy
 
     respond_to do |format|
@@ -80,4 +79,13 @@ class DevicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  def find_device
+    @device = Device.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The device you were looking for could not be found."
+      redirect_to devices_path
+  end
 end
+

@@ -1,12 +1,9 @@
 <div class="row">
   <% @devices.each do |device| %>
+  <%= device.inspect%>
   <div class="span4 device-list">
     <h3><%= device.nickname %></h3>
-    <p>
-      <b>Id:</b>
-      <%= device.id %>
-    </p>
-    
+      
     <p>
       <b>Model:</b>
       <%= device.model %>
