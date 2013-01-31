@@ -4,7 +4,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = current_user.devices
+    @devices = Device.where(:user_id => current_user[:id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,6 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
-    @device = Device.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,13 +35,12 @@ class DevicesController < ApplicationController
 
   # GET /devices/1/edit
   def edit
-    @device = Device.find(params[:id])
   end
 
   # POST /devices
   # POST /devices.json
   def create
-    @device = Device.new(params[:device])
+    @device = Device.new(params[:device].merge :user_id => current_user[:id])
 
     respond_to do |format|
       if @device.save
