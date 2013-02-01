@@ -15,7 +15,8 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
-
+    @actiontypes = ActionType.all
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @device }

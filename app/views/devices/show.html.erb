@@ -15,7 +15,9 @@
 	  <b>Ip:</b>
 	  <%= @device.ip %>
 	</p>
-
+	<% @actiontypes.each do |actiontype|%>
+		<%= @device.send(actiontype.route) %><br />
+	<% end%>
 	<h3>Tasks:</h3>
 	<p>No tasks for this device yet.</p>
 	
