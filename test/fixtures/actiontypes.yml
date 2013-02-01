@@ -1,4 +1,0 @@
-read_sensors:
-  id: 1
-  route:
-  name: "Read Sensors"
