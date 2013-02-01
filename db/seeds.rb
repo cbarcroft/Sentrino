@@ -15,3 +15,11 @@ User.create(
   :email => 'christopher.d.ferris@gmail.com',
   :password => 'password',
   :password_confirmation => 'password')
+
+
+# Action Types
+actiontypes = ActionType.create([
+		{:name => "Ping", :route => "ping"},
+		{:name => "Temperature", :route => "temp"},
+		{:name => "Humidity", :route => "humidity"}
+	])
