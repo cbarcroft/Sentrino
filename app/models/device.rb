@@ -9,15 +9,51 @@ class Device < ActiveRecord::Base
   validates :ip, :presence => true,
                     :length => { :minimum => 8 }
 
+  UNSUPPORTED_METHOD_MESSAGE = "Unsupported on this device."
+  PARSE_ERROR_MESSAGE = "Problem decoding response."
+
+
+  #TODO: Big candidate for block arguments!
   def ping
-  	Curl.get("http://#{self.ip}/ping").body_str
+  	comms =communicateWithDevice("ping");
+    if comms
+      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : "Online"
+    else
+      return PARSE_ERROR_MESSAGE
+    end
   end
 
   def temp
-  	Curl.get("http://#{self.ip}/temp").body_str
+  	comms = communicateWithDevice("temp");
+    if comms
+      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : (comms["temp"].to_f / 100).to_s + "&deg;F"
+    else
+      return PARSE_ERROR_MESSAGE
+    end
   end
 
   def humidity
-  	Curl.get("http://#{self.ip}/humidity").body_str
+  	comms = communicateWithDevice("hmdy");
+    if comms
+      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : comms["humidity"]
+    else
+      return PARSE_ERROR_MESSAGE
+    end
   end
+
+  private
+    def communicateWithDevice(method)
+      begin
+        response = JSON.parse(HTTParty.get("http://#{self.ip}/$$#{method}"));
+        return false if response == nil
+
+        if response["error"]["err"]
+          return response["error"]
+        else
+          return response["body"] 
+        end
+      rescue
+        return false
+      end
+    end
 end
