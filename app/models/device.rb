@@ -3,6 +3,7 @@ class Device < ActiveRecord::Base
   
   has_many :actions
   has_many :actiontypes, :through => :actions
+  has_many :tasks
   belongs_to :user
  
   validates :model,  :presence => true
@@ -12,8 +13,6 @@ class Device < ActiveRecord::Base
   UNSUPPORTED_METHOD_MESSAGE = "Unsupported on this device."
   PARSE_ERROR_MESSAGE = "Problem decoding response."
 
-
-  #TODO: Big candidate for block arguments!
   def ping
   	comms =communicateWithDevice("ping");
     if comms
@@ -45,17 +44,12 @@ class Device < ActiveRecord::Base
     def communicateWithDevice(method)
       begin
         response = JSON.parse(HTTParty.get("http://#{self.ip}/$$#{method}"));
-        # Replace everything below line with this eventually: response ? handleDeviceResponse(response) : false
         return false unless response
         return response["error"] if response["error"]["err"] == true
-		return response["body"]
+		    return response["body"]
       rescue
         return false
       end
     end
 
-    def handleDeviceResponse(response)
-    	return PARSE_ERROR_MESSAGE if response["error"]["err"]
-
-    end
 end
