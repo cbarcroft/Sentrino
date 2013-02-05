@@ -45,15 +45,17 @@ class Device < ActiveRecord::Base
     def communicateWithDevice(method)
       begin
         response = JSON.parse(HTTParty.get("http://#{self.ip}/$$#{method}"));
-        return false if response == nil
-
-        if response["error"]["err"]
-          return response["error"]
-        else
-          return response["body"] 
-        end
+        # Replace everything below line with this eventually: response ? handleDeviceResponse(response) : false
+        return false unless response
+        return response["error"] if response["error"]["err"] == true
+		return response["body"]
       rescue
         return false
       end
+    end
+
+    def handleDeviceResponse(response)
+    	return PARSE_ERROR_MESSAGE if response["error"]["err"]
+
     end
 end

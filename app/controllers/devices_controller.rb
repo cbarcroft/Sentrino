@@ -15,7 +15,7 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
-    @actiontypes = ActionType.all
+    @actiontypes = @device.actions
     
     respond_to do |format|
       format.html # show.html.erb
@@ -80,11 +80,12 @@ class DevicesController < ApplicationController
   end
   
   private
-  def find_device
-    @device = Device.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The device you were looking for could not be found."
-      redirect_to devices_path
-  end
+    def find_device
+      @device = Device.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        flash[:alert] = "The device you were looking for could not be found."
+        redirect_to devices_path
+    end
+
 end
 

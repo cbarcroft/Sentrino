@@ -15,8 +15,8 @@
 	  <b>Ip:</b>
 	  <%= @device.ip %>
 	</p>
-	<% @actiontypes.each do |actiontype|%>
-		<%= actiontype.name %>: <%= @device.send(actiontype.route).html_safe %><br />
+	<% @device.actions.each do |action|%>
+		<%= action.name %>: <%= @device.send(action.route).html_safe %><br />
 	<% end%>
 	<h3>Tasks:</h3>
 	<p>No tasks for this device yet.</p>
