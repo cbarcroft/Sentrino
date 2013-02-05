@@ -2,11 +2,6 @@
 	<p id="notice"><%= notice %></p>
 	
 	<p>
-	  <b>Id:</b>
-	  <%= @device.id %>
-	</p>
-	
-	<p>
 	  <b>Nickname:</b>
 	  <%= @device.nickname %>
 	</p>
@@ -20,7 +15,9 @@
 	  <b>Ip:</b>
 	  <%= @device.ip %>
 	</p>
-
+	<% @device.actions.each do |action|%>
+		<%= action.name %>: <%= @device.send(action.route).html_safe %><br />
+	<% end%>
 	<h3>Tasks:</h3>
 	<p>No tasks for this device yet.</p>
 	

@@ -20,7 +20,9 @@ Sentrino::Application.routes.draw do
 
   resources :index
   resources :application
-  resources :device
+  resources :devices do
+    resources :actions
+  end
 
   #match '/dashboard' => 'home#dashboard', :as => 'user_root'
 

@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128044716) do
+ActiveRecord::Schema.define(:version => 20130201213522) do
+
+  create_table "action_types", :force => true do |t|
+    t.string   "name"
+    t.string   "route"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "actions", :force => true do |t|
+    t.integer  "device_id"
+    t.integer  "action_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "device_actions", :force => true do |t|
     t.string   "nickname"
@@ -24,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20130128044716) do
   create_table "devices", :force => true do |t|
     t.string   "nickname"
     t.string   "model"
-    t.integer  "ip"
+    t.string   "ip"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
