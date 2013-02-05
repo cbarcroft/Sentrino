@@ -1,0 +1,29 @@
+<%= form_for [@device, @task] do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :action %><br />
+    <%= collection_select(@task, :action_id, @device.actions, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :frequency %><br />
+    <%= f.select :action, [['1 Minute','1M'],['5 Minutes','5M'],['30 Minutes','30M'],['1 Hour', '1H'], ['12 Hours', '12H'],['24 Hours', '24H']] %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end %>
