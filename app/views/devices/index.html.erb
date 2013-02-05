@@ -1,21 +1,26 @@
 <div class="row">
   <% @devices.each do |device| %>
   <div class="span4 device-list">
-    <h3><%= device.nickname %></h3>
+    <div class="inner">
+      <h3><%= device.nickname %></h3>
+      <p>
+        <b>Id:</b>
+        <%= device.id %>
+      </p>
       
-    <p>
-      <b>Model:</b>
-      <%= device.model %>
-    </p>
-    
-    <p>
-      <b>Ip:</b>
-      <%= device.ip %>
-    </p>
-    <p>
-      <%= link_to 'Edit', edit_device_path(device), :class => "btn" %>
-      <%= link_to 'Show', device, :class => "btn" %>
-    </p>
+      <p>
+        <b>Model:</b>
+        <%= device.model %>
+      </p>
+      
+      <p>
+        <b>Ip:</b>
+        <%= device.ip %>
+      </p>
+      <p>
+        <%= link_to 'Show', device, :class => "btn" %>
+      </p>
+    </div>
   </div>
   <% end %>
 </div>
