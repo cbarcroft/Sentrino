@@ -24,6 +24,7 @@
 	<h3>Tasks:</h3>
 	<p>No tasks for this device yet.</p>
 	
-	<%= link_to 'Edit', edit_device_path(@device), :class => "btn" %>
 	<%= link_to 'Back', "/", :class => "btn" %>
+	<%= link_to 'Edit', edit_device_path(@device), :class => "btn" %>
+	<%= link_to 'Destroy', @device, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
 </section>
