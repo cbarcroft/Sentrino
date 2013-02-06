@@ -1,6 +1,7 @@
 <div class="row">
   <% @devices.each do |device| %>
   <div class="span4 device-list">
+
     <h3><%= device.nickname %></h3>
       
     <p>
@@ -17,6 +18,7 @@
       <%= link_to 'Edit', edit_device_path(device), :class => "btn" %>
       <%= link_to 'Show', device, :class => "btn" %>
     </p>
+
   </div>
   <% end %>
 </div>
