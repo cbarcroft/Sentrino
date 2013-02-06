@@ -2,5 +2,5 @@ class Task < ActiveRecord::Base
   has_one :action
   belongs_to :device
 
-  attr_accessible :frequency, :name
+  attr_accessible :frequency, :name, :action_id
 end
