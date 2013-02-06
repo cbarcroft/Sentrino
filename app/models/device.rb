@@ -42,6 +42,7 @@ class Device < ActiveRecord::Base
 
   private
     def communicateWithDevice(method)
+      return false #TEMP - disabling to speed up work
       begin
         response = JSON.parse(HTTParty.get("http://#{self.ip}/$$#{method}"));
         return false unless response
