@@ -16,6 +16,7 @@ class DevicesController < ApplicationController
   # GET /devices/1.json
   def show
     @actiontypes = @device.actions
+    @tasks = @device.tasks
     
     respond_to do |format|
       format.html # show.html.erb
