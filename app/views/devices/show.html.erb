@@ -1,33 +1,35 @@
-<section class="container">
-	<p id="notice"><%= notice %></p>
-	
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nickname:</b>
+  <%= @device.nickname %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%= @device.model %>
+</p>
+
+<p>
+  <b>Ip:</b>
+  <%= @device.ip %>
+</p>
+<% @device.actions.each do |action|%>
+	<%= action.name %>: <%= @device.send(action.route).html_safe %><br />
+<% end%>
+<h3>Tasks: <%= link_to 'Schedule Task', new_device_task_path(@device), :class => "btn" %></h3>
+<% @device.tasks.each do |task| %>
 	<p>
-	  <b>Nickname:</b>
-	  <%= @device.nickname %>
+		<%= task.name %> -
+		<%= task.frequency %> -
+		<%= @device.actions.find(task.action_id).name %>
+		<%= link_to 'Edit Task', edit_polymorphic_path([@device, task]), :class => "btn"%>
 	</p>
-	
-	<p>
-	  <b>Model:</b>
-	  <%= @device.model %>
-	</p>
-	
-	<p>
-	  <b>Ip:</b>
-	  <%= @device.ip %>
-	</p>
-	<% @device.actions.each do |action|%>
-		<%= action.name %>: <%= @device.send(action.route).html_safe %><br />
-	<% end%>
-	<h3>Tasks: <%= link_to 'Schedule Task', new_device_task_path(@device), :class => "btn" %></h3>
-	<% @device.tasks.each do |task| %>
-		<p>
-			<%= task.name %> -
-			<%= task.frequency %> -
-			<%= @device.actions.find(task.action_id).name %>
-			<%= link_to 'Edit Task', edit_polymorphic_path([@device, task]), :class => "btn"%>
-		</p>
-	<% end %>
-	<%= link_to 'Back', "/", :class => "btn" %>
-	<%= link_to 'Edit', edit_device_path(@device), :class => "btn" %>
-	<%= link_to 'Destroy', @device, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
-</section>
+<% end %>
+<div class="device-actions">
+	<%= link_to raw('<i class="icon-home"></i>'), "/", :class => "btn" %>
+	<%= link_to raw('<i class="icon-pencil"></i>'), edit_device_path(@device), :class => "btn" %>
+	<%= link_to raw('<i class="icon-remove"></i>'), @device, method: :delete,
+	data: { confirm: 'Are you sure you want to delete this device?' }, :class=>"btn btn-danger" %>
+</div>
+

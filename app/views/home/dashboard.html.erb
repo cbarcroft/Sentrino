@@ -1,6 +1,24 @@
-<section class="container">
+<section class="dashboard-wrap">
 	<h1>Welcome, <%= current_user.email %>!</h1>
-	<h2>Your devices</h2>
+	
+	<div class="tasks-container">
+		<h2>Upcoming tasks</h2>
+		
+		<ul>
+			<li>Cat laser show: 2:30pm (10 minutes from now)</li>
+			<li>Take temperature: 3:05pm (35 minutes from now)</li>
+		</ul>
+	</div>
+
+	<div class="device-list-head">
+		<h2>Your devices</h2>
+		<div class="device-list-options">
+			<a id="devices-tiled-view" href="#"=><i class="icon-th-large"></i></a>
+			<a id="devices-list-view" href="#"><i class="icon-reorder"></i></a>
+			<a href="#"><i class="icon-th"></i></a>
+		</div>
+	</div>
+
 	<%= render :template => "devices/index" %>
 	
 	<%= link_to 'Add a Device', new_device_path, :class => "btn btn-primary btn-large" %>

@@ -1,7 +1,10 @@
+@import "bootstrap"
+@import "font-awesome"
+
 html, body
-	padding: 0
-	margin: 0
-	height: 100%
+	background: #eee
+	font-size: 16px
+	font-family: 'Open Sans', sans-serif
 
 ::selection
 	background: #F2905B /* Safari */
@@ -9,27 +12,21 @@ html, body
 ::-moz-selection
 	background: #F2905B /* Firefox */
 
-label
-	display: inline-block
+a
+	&:hover
+	color: #006DCC
 
-/* ==========================================================================
-   Mixins
-   ========================================================================== */
-=gradient($from, $to)
-	/* fallback/image non-cover color */
-	background-color: $from
+.fleft
+	float: left
 
-	/* Firefox 3.6+ */
-	background-image: -moz-linear-gradient($from, $to)
+.fright
+	float: right
 
-	/* Safari 4+, Chrome 1+ */
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to))
+.clear
+	clear: both
 
-	/* Safari 5.1+, Chrome 10+ */
-	background-image: -webkit-linear-gradient($from, $to)
-
-	/* Opera 11.10+ */
-	background-image: -o-linear-gradient($from, $to)
+.center
+	text-align: center
 
 /* ==========================================================================
    Layout
@@ -40,19 +37,28 @@ label
 	border-bottom: 1px solid #eaeaea
 
 #container
-	height: 100%
-	position: relative
+	// _
 
-#body
-	padding-bottom: 20px
-	margin-bottom: 30px
+#top-nav
 
-footer
+	.navbar-inner
+		padding: 0.5em 2.5em
+		background: #444
+	a
+		color: #eaeaea
+		&:hover
+			color: #fff
+
+
+/* Footer
+   ========================================================================== */
+#footer
 	display: block
 	padding: 1%
-	height: 20px
+	margin-top: 60px
+	height: 40px
 	width: 98%
-	background: #eee
+	background: #222
 	text-align: center
 	font-size: 0.9em
 
@@ -61,25 +67,151 @@ footer
    Index/Home
    ========================================================================== */
 
+.dashboard-wrap
+	@extend .container-fluid
+
+	h1
+		padding: 0.5em 0 0.6em 20px
+		margin: 0 -20px 10px -20px
+		background: #fff
+		color: #3a3a3a
+		@include box-shadow(1px 1px 5px rgba(0, 0, 0, 0.1))
+
+	h2
+		font-weight: 400
+
+.tasks-container
+	display: block
+	margin-top: 1em
+
+.device-list-head
+	display: block
+	margin-top: 2em
+
+
+.device-list
+	@include clearfix
+	margin-top: 1em
+	margin-bottom: 3em
+
+	.device-list-item
+
+		p
+			margin:  0 0 0.4em
+
+		h3
+			padding: 0
+			margin:  0 0 0.7em
+			line-height: 1em
+			font-weight: 300
+			font-size: 1.6em
+
+		a:hover
+			text-decoration: none
+
+		&.tiled
+			float: left
+			margin: 0 1%
+			width: 23%
+			min-width: 200px
+		&.list-view
+			display: block
+			margin: 0 0 1%
+		&.table-view
+			// _
+
+		.inner	
+			background: #fff
+			border: 1px solid #ccc
+			@include border-radius(4px)
+			margin-bottom: 1em
+			@include box-shadow(-1px 1px 5px rgba(50, 50, 50, 0.15))
+
+		&:hover .inner
+			// _
+
+		//Main content area
+		.device-info
+			padding: 0.8em 1.1em
+
+		// Edit/show buttons
+		.device-buttons
+			background: #F7F7F7
+			padding: 0.4em
+			@include box-shadow(inset 1px 4px 5px -5px #878F82)
+			@include border-radius(0 0 4px 4px)
+
+			a
+				color: #333
+				padding: 0.4em 0.9em
+
+			a:hover
+				text-decoration: none
+				color: #006DCC
+				// background: rgba(255, 255, 255, 0.8)
+
+.device-list-head
+	@include clearfix
+	h2
+		float: left
+		margin: 0 2em 0 0
+
+	.device-list-options
+		float: left
+		margin-top: 0.4em
+		font-size: 1.5em
+		a
+			display: inline-block
+			color: #333
+			&:hover
+				color: #555
+				text-decoration: none
+
+/* ==========================================================================
+   Devices
+   ========================================================================== */
+
+.device-actions
+	display: block
+
+	.btn
+		font-size: 1.1em
+
 /* ==========================================================================
    Devise
    ========================================================================== */
 
 .user-panel
-	padding: 1em 2em
-	border: 1px solid #e0e0e0
-	border-radius: 4px
-	background: #fafafa
+	padding: 2em
+	margin: 0 auto
+	width: 350px
 
 	h2
 		margin: 0 0 1em
+		text-align: center
 
-.device-list
+	label
+		display: inline-block
 
-	.inner
-		border: 1px solid #ddd
-		background: #fafbfc
-		margin-bottom: 1em
+	input[type="email"],
+	input[type="password"],
+	input[type="submit"]
+		display: block
+		width: 100%
+		@include box-sizing(border-box)
 
-	p, h3
-		margin:  0.2em 1.5em 0.4em
+	input[type="email"],
+	input[type="password"]
+		height: 3em
+		box-shadow: 0 0 0 #000
+		&:focus
+			background: #fcfcfc
+			color: #333
+
+	input[type="checkbox"]
+		margin-top: -3px
+
+.user-options
+	@include clearfix
+	display: block
+	margin: 0.4em 0 1em
