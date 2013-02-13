@@ -8,7 +8,12 @@
 				<%= user_signed_in? ? link_to('Logout', destroy_user_session_path, :method=>'delete') : link_to("Sign in/Create Account", "/sign_in") %>
 			</li>
 			<% if user_signed_in? %>
-			<li><a href="">Settings</a></li>
+			<li>
+				<a href="" id="settings-button" data-toggle="dropdown" title="settings" class="dropdown-toggle">
+					<i class="icon-cogs"></i>
+					<i class="icon-angle-down"></i>
+				</a>
+			</li>
 			<% end %>
 		</ul>
 	</div>

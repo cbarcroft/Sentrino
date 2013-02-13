@@ -1,6 +1,6 @@
 <%= form_for(@device) do |f| %>
   <% if @device.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-error">
       <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
 
       <ul>
@@ -24,6 +24,6 @@
     <%= f.text_field :ip %>
   </div>
   <div class="actions">
-    <%= f.submit :class => "btn btn-primary" %>
+    <%= f.submit :class => "btn btn-primary btn-large" %>
   </div>
 <% end %>
