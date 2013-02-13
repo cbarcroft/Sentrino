@@ -1,24 +1,27 @@
-<div class="row">
+<div class="device-list">
   <% @devices.each do |device| %>
-  <div class="span4 device-list">
-
-    <h3><%= device.nickname %></h3>
-      
-    <p>
-      <b>Model:</b>
-      <%= device.model %>
-    </p>
-    
-    <p>
-      <b>Ip:</b>
-      <%= device.ip %>
-    </p>
-    
-    <p>
-      <%= link_to 'Edit', edit_device_path(device), :class => "btn" %>
-      <%= link_to 'Show', device, :class => "btn" %>
-    </p>
-
-  </div>
+  <article class="device-list-item tiled">
+  
+    <div class="inner">
+      <div class="device-info">
+        <h3><%= link_to device.nickname, device %></h3>
+          
+        <p>
+          <b>Model:</b>
+          <%= device.model %>
+        </p>
+        
+        <p>
+          <b>Ip:</b>
+          <%= device.ip %>
+        </p>
+      </div>
+      <footer class="device-buttons">
+        <%= link_to raw('<i class="icon-pencil"></i>'), edit_device_path(device) %>
+        <%= link_to raw('<i class="icon-eye-open"></i>'), device %>
+      </footer>
+    </div>
+  
+  </article>
   <% end %>
 </div>

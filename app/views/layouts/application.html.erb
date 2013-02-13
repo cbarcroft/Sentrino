@@ -10,12 +10,14 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <title>Sentrino</title>
 
-        <%= stylesheet_link_tag "application", :media => "all" %>			  
         <%= javascript_include_tag "application" %>
+        <%= stylesheet_link_tag "application", :media => "all" %>			  
 
         <%= csrf_meta_tags %>
     </head>
@@ -29,16 +31,14 @@
         <div id="container">
 
             <% if notice %>
-            <p class="warning"><%= notice %></p>
+            <p class="alert alert-success"><%= notice %></p>
             <% end %>
 
             <% if alert %>
-            <p class="error"><%= alert %></p>
+            <p class="alert alert-error"><%= alert %></p>
             <% end %>
-
-            <div id="body">
-                <%= yield %>
-            </div>
+    
+            <%= yield %>
         </div>
 
         <script src="js/plugins.js"></script>
