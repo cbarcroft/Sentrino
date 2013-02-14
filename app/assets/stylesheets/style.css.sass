@@ -28,6 +28,10 @@ a
 .center
 	text-align: center
 
+@mixin hand
+	cursor: hand
+	cursor: pointer
+
 /* ==========================================================================
    Layout
    ========================================================================== */
@@ -109,16 +113,35 @@ a
 		a:hover
 			text-decoration: none
 
-		&.tiled
+		// Will be an image; right now it's a
+		// placeholder div
+		.device-image
+			display: block
+			margin-bottom: 0.5em
+			height: 200px
+			width: 100%
+			background: #37272A
+
+		&.tiled-view
 			float: left
 			margin: 0 1%
 			width: 23%
 			min-width: 200px
+
 		&.list-view
 			display: block
 			margin: 0 0 1%
-		&.table-view
-			// _
+
+			.device-image
+				display: none
+
+		&.block-view
+			float: left
+			width: 46%
+			margin: 0 2%
+
+			.device-image
+				height: 260px
 
 		.inner	
 			background: #fff
@@ -152,6 +175,7 @@ a
 
 .device-list-head
 	@include clearfix
+	
 	h2
 		float: left
 		margin: 0 2em 0 0

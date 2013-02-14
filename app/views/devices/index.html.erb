@@ -1,10 +1,12 @@
 <div class="device-list">
   <% @devices.each do |device| %>
-  <article class="device-list-item tiled">
+  <article class="device-list-item tiled-view">
   
     <div class="inner">
       <div class="device-info">
         <h3><%= link_to device.nickname, device %></h3>
+
+        <%= link_to raw("<div class='device-image'></div>"), device %>
           
         <p>
           <b>Model:</b>
