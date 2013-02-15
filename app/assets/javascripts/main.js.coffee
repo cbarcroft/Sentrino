@@ -1,18 +1,22 @@
 $(document).ready ->
 	console.log "ready."
 
-	# Note: smelly
-	$("#devices-block-view").click ->
-		$.each $(".device-list-item"), (key, value) ->
-			$(value).removeClass("list-view tiled-view").addClass("block-view")
+	getViewFromId = (id) ->
+		id = id.split("-").slice(1).join("-")
 
-	$("#devices-tiled-view").click ->
-		$.each $(".device-list-item"), (key, value) ->
-			$(value).removeClass("list-view block-view").addClass("tiled-view")
+	$.each $('.device-list-options a'), (key, value) ->
+		$(value).click (event) ->
+			$.session.set "device-layout", getViewFromId($(value).attr("id"))
+			$.each $(".device-list-item"), (key2, value2) ->
+				$(value2).removeClass "list-view tiled-view block-view"
+				$(value2).addClass $.session.get "device-layout"
 
-	$("#devices-list-view").click ->
-		$.each $(".device-list-item"), (key, value) ->
-			$(value).removeClass("tiled-view block-view").addClass("list-view")
+	# Default view = block view
+	$.each $(".device-list-item"), (key, value) ->
+		if $.session.get("device-layout") != undefined
+			$(value).addClass $.session.get("device-layout")
+		else
+			$(value).addClass("block-view")
 
 	# Open settings menu when the button if it is not open,
 	# close it if it is
@@ -25,7 +29,7 @@ $(document).ready ->
 				$("#settings-dropdown").offset
 					top: $("#top-nav").height()
 					left: $(window).width() - $("#settings-dropdown").width() - 20
-					
+
 				$("#settings-close i").click (event) ->
 					$("#settings-dropdown").remove()
 		else
