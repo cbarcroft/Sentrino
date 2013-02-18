@@ -25,6 +25,8 @@ Sentrino::Application.routes.draw do
     resources :tasks
   end
 
+  match '/settings' => 'home#settings'
+
   #match '/dashboard' => 'home#dashboard', :as => 'user_root'
 
   devise_for :users, :skip => [:sessions]

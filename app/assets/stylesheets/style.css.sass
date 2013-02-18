@@ -28,6 +28,10 @@ a
 .center
 	text-align: center
 
+@mixin hand
+	cursor: hand
+	cursor: pointer
+
 /* ==========================================================================
    Layout
    ========================================================================== */
@@ -49,6 +53,37 @@ a
 		&:hover
 			color: #fff
 
+
+/* Arrow_box
+   ========================================================================== */
+.arrow_box
+	position: relative
+	background: #ffffff
+	border: 2px solid #ffffff
+
+.arrow_box:after,
+.arrow_box:before
+	bottom: 100%
+	border: solid transparent
+	content: " "
+	height: 0
+	width: 0
+	position: absolute
+	pointer-events: none
+
+.arrow_box:after
+	border-color: rgba(255, 255, 255, 0)
+	border-bottom-color: #ffffff
+	border-width: 0px
+	right: 20%
+	margin-left: -10px
+
+.arrow_box:before
+	border-color: rgba(255, 255, 255, 0)
+	border-bottom-color: #ffffff
+	border-width: 7px
+	right: 20%
+	margin-left: -10px
 
 /* Footer
    ========================================================================== */
@@ -94,64 +129,84 @@ a
 	margin-top: 1em
 	margin-bottom: 3em
 
-	.device-list-item
+.device-list-item
 
-		p
-			margin:  0 0 0.4em
+	p
+		margin:  0 0 0.4em
 
-		h3
-			padding: 0
-			margin:  0 0 0.7em
-			line-height: 1em
-			font-weight: 300
-			font-size: 1.6em
+	h3
+		padding: 0
+		margin:  0 0 0.7em
+		line-height: 1em
+		font-weight: 300
+		font-size: 1.6em
 
-		a:hover
-			text-decoration: none
+	a:hover
+		text-decoration: none
 
-		&.tiled
-			float: left
-			margin: 0 1%
-			width: 23%
-			min-width: 200px
-		&.list-view
-			display: block
-			margin: 0 0 1%
-		&.table-view
-			// _
+	// Will be an image; right now it's a
+	// placeholder div
+	.device-image
+		display: block
+		margin-bottom: 0.5em
+		height: 200px
+		width: 100%
+		background: #37272A
 
-		.inner	
-			background: #fff
-			border: 1px solid #ccc
-			@include border-radius(4px)
-			margin-bottom: 1em
-			@include box-shadow(-1px 1px 5px rgba(50, 50, 50, 0.15))
+	&.tiled-view
+		float: left
+		margin: 0 1%
+		width: 23%
+		min-width: 200px
 
-		&:hover .inner
-			// _
+	&.list-view
+		display: block
+		margin: 0 0 1%
 
-		//Main content area
-		.device-info
-			padding: 0.8em 1.1em
+		.device-image
+			display: none
 
-		// Edit/show buttons
-		.device-buttons
-			background: #F7F7F7
-			padding: 0.4em
-			@include box-shadow(inset 1px 4px 5px -5px #878F82)
-			@include border-radius(0 0 4px 4px)
+	&.block-view
+		float: left
+		width: 46%
+		margin: 0 2%
 
-			a
-				color: #333
-				padding: 0.4em 0.9em
+		.device-image
+			height: 260px
 
-			a:hover
-				text-decoration: none
-				color: #006DCC
-				// background: rgba(255, 255, 255, 0.8)
+	.inner	
+		background: #fff
+		border: 1px solid #ccc
+		@include border-radius(4px)
+		margin-bottom: 1em
+		@include box-shadow(-1px 1px 5px rgba(50, 50, 50, 0.15))
+
+	&:hover .inner
+		// _
+
+//Main content area
+.device-info
+	padding: 0.8em 1.1em
+
+// Edit/show buttons
+.device-buttons
+	background: #F7F7F7
+	padding: 0.4em
+	@include box-shadow(inset 1px 4px 5px -5px #878F82)
+	@include border-radius(0 0 4px 4px)
+
+	a
+		color: #333
+		padding: 0.4em 0.9em
+
+	a:hover
+		text-decoration: none
+		color: #006DCC
+		// background: rgba(255, 255, 255, 0.8)
 
 .device-list-head
 	@include clearfix
+	
 	h2
 		float: left
 		margin: 0 2em 0 0
@@ -160,12 +215,60 @@ a
 		float: left
 		margin-top: 0.4em
 		font-size: 1.5em
+		
 		a
 			display: inline-block
 			color: #333
-			&:hover
-				color: #555
-				text-decoration: none
+		a:hover
+			color: #555
+			text-decoration: none
+
+/* ==========================================================================
+   Settings dropdown
+   ========================================================================== */
+#settings-dropdown
+	@extend .arrow_box
+	position: absolute
+	top: 0
+	left: 0
+
+	padding: 0.5em
+	border: 1px solid #ccc
+	@include border-radius(0 0 4px 4px)
+	min-width: 300px
+	height 200px
+
+	background: #fff
+	@include box-shadow(-1px 1px 5px rgba(50, 50, 50, 0.15))
+
+	li
+		list-style-type: none
+
+	a
+		display: block
+		padding: 10px
+		margin: 0 -8px
+		color: #444
+
+	a:hover
+		background-color: #3290C7
+		text-decoration: none
+		color: #fafafa
+
+.settings-section
+	@include clearfix
+	@include hand
+	padding: 0.4em 0
+	border-bottom: 1px solid #ddd
+
+	&:last-child
+		border-bottom: 0 none
+
+#settings-close
+	float: right
+	margin-right: 5px
+	color: #444
+
 
 /* ==========================================================================
    Devices
