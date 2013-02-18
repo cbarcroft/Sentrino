@@ -9,4 +9,8 @@ class HomeController < ApplicationController
   		render :template => 'home/index'
   	end
   end
+
+  def settings
+    render :partial => "shared/settings"
+  end
 end
