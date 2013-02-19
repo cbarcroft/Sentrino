@@ -2,37 +2,24 @@ class DevicesController < ApplicationController
   before_filter :find_device, :only => [:show, :edit, :update, :destroy]
   
   # GET /devices
-  # GET /devices.json
   def index
     @devices = Device.where(:user_id => current_user[:id])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @devices }
-    end
   end
 
   # GET /devices/1
-  # GET /devices/1.json
   def show
-    @actiontypes = @device.actions
-    @tasks = @device.tasks
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @device }
+    @action_replies = {}
+    @device.action_types.each do |action_type|
+      reply = @device.send(action_type.route)
+      @action_replies[action_type.name] = reply ? reply : "N/A" 
     end
+
+    @tasks = @device.tasks  
   end
 
   # GET /devices/new
-  # GET /devices/new.json
   def new
     @device = Device.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @device }
-    end
   end
 
   # GET /devices/1/edit
@@ -40,44 +27,37 @@ class DevicesController < ApplicationController
   end
 
   # POST /devices
-  # POST /devices.json
   def create
     @device = Device.new(params[:device].merge :user_id => current_user[:id])
-
-    respond_to do |format|
-      if @device.save
-        format.html { redirect_to @device, notice: 'Device was successfully created.' }
-        format.json { render json: @device, status: :created, location: @device }
+    if @device.save
+      if register_actions(@device)
+        redirect_to @device, notice: 'Device was successfully created, and its actions have been automatically registered.' 
       else
-        format.html { render action: "new" }
-        format.json { render json: @device.errors, status: :unprocessable_entity }
+        redirect_to @device, notice: 'Device was successfully created.  We were not able to automatically register actions for the device.'
       end
+    else
+      render action: "new" 
     end
   end
 
   # PUT /devices/1
-  # PUT /devices/1.json
   def update
-    respond_to do |format|
-      if @device.update_attributes(params[:device])
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
-        format.json { head :no_content }
+    if @device.update_attributes(params[:device])
+      @device.actions.destroy_all
+      if register_actions(@device)
+        redirect_to @device, notice: 'Device was successfully updated. Actions were automatically re-registered.'
       else
-        format.html { render action: "edit" }
-        format.json { render json: @device.errors, status: :unprocessable_entity }
+        redirect_to @device, notice: 'Device was successfully updated. Actions were not automatically re-registered.'
       end
+    else
+      render action: "edit" 
     end
   end
 
   # DELETE /devices/1
-  # DELETE /devices/1.json
   def destroy
     @device.destroy
-
-    respond_to do |format|
-      format.html { redirect_to devices_url }
-      format.json { head :no_content }
-    end
+    redirect_to devices_url 
   end
   
   private
@@ -86,6 +66,18 @@ class DevicesController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         flash[:alert] = "The device you were looking for could not be found."
         redirect_to devices_path
+    end
+
+    def register_actions(device)
+      ActionType.all.each do |actiontype|
+        reply = device.send(actiontype[:route])
+        if reply != "Problem decoding response."
+          @action = device.actions.build
+          @action[:action_type_id] = actiontype[:id]
+          @action.save
+        end
+      end
+      return true
     end
 
 end

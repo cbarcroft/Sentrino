@@ -14,15 +14,15 @@
   <b>Ip:</b>
   <%= @device.ip %>
 </p>
-<% @device.actions.each do |action|%>
-	<%= action.name %>: <%= @device.send(action.route).html_safe %><br />
-<% end%>
+<% @action_replies.each do |name, reply|%>
+	<%= name %>: <%= reply.html_safe %><br />
+<% end %>
 <h3>Tasks: <%= link_to 'Schedule Task', new_device_task_path(@device), :class => "btn" %></h3>
 <% @device.tasks.each do |task| %>
 	<p>
 		<%= task.name %> -
 		<%= task.frequency %> -
-		<%= @device.actions.find(task.action_id).name %>
+		<%= task.action_type.inspect %>
 		<%= link_to 'Edit Task', edit_polymorphic_path([@device, task]), :class => "btn"%>
 	</p>
 <% end %>

@@ -8,6 +8,7 @@ class TasksController < ApplicationController
 	
 	def create
 		@task = @device.tasks.build(params[:task])
+		@task.action_id = Action.find() ##FIXME
 		if @task.save
 			flash[:notice] = "Task has been scheduled."
 			redirect_to @device

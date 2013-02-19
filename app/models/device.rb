@@ -2,7 +2,7 @@ class Device < ActiveRecord::Base
   attr_accessible :nickname, :model, :ip, :user_id
   
   has_many :actions
-  has_many :actiontypes, :through => :actions
+  has_many :action_types, :through => :actions
   has_many :tasks
   belongs_to :user
  
@@ -34,7 +34,7 @@ class Device < ActiveRecord::Base
   def humidity
   	comms = communicateWithDevice("hmdy");
     if comms
-      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : comms["humidity"]
+      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : (comms["hmdy"].to_f / 100).to_s + "%"
     else
       return PARSE_ERROR_MESSAGE
     end
@@ -42,7 +42,7 @@ class Device < ActiveRecord::Base
 
   private
     def communicateWithDevice(method)
-      return false #TEMP - disabling to speed up work
+      #return false # Enable this to avoid device timeouts if it is acting up
       begin
         response = JSON.parse(HTTParty.get("http://#{self.ip}/$$#{method}"));
         return false unless response
