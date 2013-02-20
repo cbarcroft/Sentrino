@@ -7,8 +7,11 @@ class Device < ActiveRecord::Base
   belongs_to :user
  
   validates :model,  :presence => true
+
+  @ip_regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
   validates :ip, :presence => true,
-                    :length => { :minimum => 8 }
+                 :length => { :minimum => 8 },
+                 :format => { :with => @ip_regex, :message => "Invalid IP address. Must be in format: X.X.X.X "}
 
   UNSUPPORTED_METHOD_MESSAGE = "Unsupported on this device."
   PARSE_ERROR_MESSAGE = "Problem decoding response."

@@ -4,4 +4,8 @@ class Task < ActiveRecord::Base
   belongs_to :device
 
   attr_accessible :frequency, :name, :action_id
+
+  validates :name,  :presence => true
+  validates :frequency,  :presence => true
+  validates :action_id,  :presence => true
 end
