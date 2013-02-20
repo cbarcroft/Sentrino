@@ -22,7 +22,7 @@
 	<p>
 		<%= task.name %> -
 		<%= task.frequency %> -
-		<%= task.action_type.inspect %>
+		<%= task.action_type.name %>
 		<%= link_to 'Edit Task', edit_polymorphic_path([@device, task]), :class => "btn"%>
 	</p>
 <% end %>

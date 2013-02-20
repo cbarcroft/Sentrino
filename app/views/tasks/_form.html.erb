@@ -17,7 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :action_id %><br />
-    <%= collection_select(:task, :action_id, @device.action_types, :id, :name) %>
+    <select name="task[action_id]" id="task_action_id"> 
+      <% @actions_with_types.each do |action_with_type| %>
+        <option value="<%= action_with_type.id %>"><%= action_with_type.action_type.name %></option>
+      <% end %>
+    </select>
   </div>
   <div class="field">
     <%= f.label :frequency %><br />

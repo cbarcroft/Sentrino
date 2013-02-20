@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 	before_filter :find_device
 	before_filter :find_task, :only => [:show, :edit, :update, :destroy]
+	before_filter :find_actions_with_types, :only => [:new, :edit]
 
 	def new
 		@task = @device.tasks.build
@@ -8,7 +9,6 @@ class TasksController < ApplicationController
 	
 	def create
 		@task = @device.tasks.build(params[:task])
-		@task.action_id = Action.find() ##FIXME
 		if @task.save
 			flash[:notice] = "Task has been scheduled."
 			redirect_to @device
@@ -44,7 +44,12 @@ class TasksController < ApplicationController
 		def find_device
 			@device = Device.find(params[:device_id])
 		end
+
 		def find_task
 			@task = @device.tasks.find(params[:id])
+		end
+
+		def find_actions_with_types
+			@actions_with_types = @device.actions.joins(:action_type)
 		end
 end
