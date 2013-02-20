@@ -31,8 +31,8 @@ actiontypes = ActionType.create([
 	])
 
 #Associate Action Types to Devices
-@ChrisDevice.actions.build(:action_id => ActionType.where("name = 'Ping'").first.id).save
-@ChrisDevice.actions.build(:action_id => ActionType.where("name = 'Temperature'").first.id).save
-@ChrisDevice.actions.build(:action_id => ActionType.where("name = 'Humidity'").first.id).save
+@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Ping'").first.id).save
+@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Temperature'").first.id).save
+@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Humidity'").first.id).save
 
 
