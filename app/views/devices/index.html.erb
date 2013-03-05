@@ -8,19 +8,26 @@
 
         <%= link_to raw("<div class='device-image'></div>"), device %>
           
-        <p>
-          <b>Model:</b>
-          <%= device.model %>
-        </p>
-        
-        <p>
-          <b>Ip:</b>
-          <%= device.ip %>
-        </p>
+        <ul>
+          <li>
+            <b>Model:</b>
+            <p><%= device.model %></p>
+          </li>
+          
+          <li>
+            <b>Ip:</b>
+            <p><%= device.ip %></p>
+          </li>
+        </ul>
+
       </div>
       <footer class="device-buttons">
-        <%= link_to raw('<i class="icon-pencil"></i>'), edit_device_path(device) %>
-        <%= link_to raw('<i class="icon-eye-open"></i>'), device %>
+        <%= link_to raw('<i class="icon-pencil"></i><span>Edit</span>'), edit_device_path(device),
+        :rel => "tooltip", :title => "Edit" %>
+        <%= link_to raw('<i class="icon-eye-open"></i><span>Show</span>'), device,
+        :rel => "tooltip", :title => "Show" %>
+        <%= link_to raw('<i class="icon-wrench"></i><span>New Task</span>'), new_device_task_path(device),
+        :rel => "tooltip", :title => "New Task" %>
       </footer>
     </div>
   

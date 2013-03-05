@@ -1,9 +1,8 @@
-<section class="container">
+<div class="task-form">
 	<h1>Editing Task</h1>
 	
 	<%= render 'form' %>
 	
-	<br />
 	<%= link_to 'Back', "/", :class=>"btn" %>
 	<%= link_to 'Delete', [@device, @task], method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
-</section>
+</div>
