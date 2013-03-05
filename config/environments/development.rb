@@ -37,4 +37,6 @@ Sentrino::Application.configure do
   
   # Adding default URL options so Devise will stop whining
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  Paperclip.options[:command_path] = "/usr/local/bin/identify"
 end
