@@ -1,12 +1,14 @@
 class Device < ActiveRecord::Base
-  attr_accessible :nickname, :model, :ip, :user_id, :port
-  
+  attr_accessible :nickname, :model, :ip, :user_id, :image, :port
+
   has_many :actions
   has_many :action_types, :through => :actions
   has_many :tasks
   belongs_to :user
  
   validates :model,  :presence => true
+
+  has_attached_file :image, :default_url => "/images/:style/missing.png"
 
   @ip_regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
   validates :ip, :presence => true,

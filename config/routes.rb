@@ -26,6 +26,7 @@ Sentrino::Application.routes.draw do
   end
 
   match '/settings' => 'home#settings'
+  match "/runcron" => "tasks#cron"
 
   #match '/dashboard' => 'home#dashboard', :as => 'user_root'
 

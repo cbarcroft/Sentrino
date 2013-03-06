@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227015153) do
+ActiveRecord::Schema.define(:version => 20130305192000) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
@@ -40,18 +40,23 @@ ActiveRecord::Schema.define(:version => 20130227015153) do
     t.string   "model"
     t.string   "ip"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
     t.integer  "port"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.string   "frequency"
     t.integer  "action_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "device_id"
+    t.string   "result_action"
   end
 
   add_index "tasks", ["action_id"], :name => "index_tasks_on_action_id"

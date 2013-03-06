@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :action_id %><br />
+    <%= f.label :action_id %>
     <select name="task[action_id]" id="task_action_id"> 
       <% @actions_with_types.each do |action_with_type| %>
         <option value="<%= action_with_type.id %>"><%= action_with_type.action_type.name %></option>
@@ -24,8 +24,12 @@
     </select>
   </div>
   <div class="field">
-    <%= f.label :frequency %><br />
+    <%= f.label :frequency %>
     <%= f.select :frequency, [['1 Minute','1M'],['5 Minutes','5M'],['30 Minutes','30M'],['1 Hour', '1H'], ['12 Hours', '12H'],['24 Hours', '24H']] %>
+  </div>
+  <div class="field">
+    <%= f.label :result_action %><br />
+    <%= f.select :result_action, [['Email','email'],['Store','store']] %>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>

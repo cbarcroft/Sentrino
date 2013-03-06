@@ -1,0 +1,70 @@
+.device-form
+	@extend .pretty-form
+
+/* Show
+   ========================================================================== */
+
+#device-show
+	@include clearfix
+	@include full-width
+	width: 100%
+
+	h1,
+	h2
+		font-weight: 300
+
+#primary,
+#tasks
+	float: left
+	padding: 0.3em 0 1em
+	@include box-sizing(border-box)
+
+#primary
+	@include box-sizing(border-box)
+	width: 30%
+	padding: 0 5% 0 0
+
+	.device-actions a
+		display: block
+		margin-bottom: 5px
+
+#tasks
+	width: 70%
+
+	h2
+		float: left
+		@include clearfix
+
+	.task-list-item
+		padding: 0.5em
+		border-bottom: 1px solid #ddd
+
+		&:last-child
+			padding-bottom: 1.2em
+			border-bottom-width: 0
+
+		&:hover
+			background: #fdfdfd
+
+.new-task
+	margin-top: 1em
+
+
+/* Edit
+   ========================================================================== */
+
+.device-actions
+	display: block
+	margin: 1.1em 0 0
+	font-weight: 300
+
+	i
+		font-size: 1.1em
+
+	a
+		color: #333
+
+		&:hover
+			text-decoration: none
+			color: #555
+
