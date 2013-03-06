@@ -1,9 +1,11 @@
-<h1>Editing device</h1>
-
-<%= render 'form' %>
-
-<div class="device-actions">
-	<%= link_to raw('<i class="icon-home"></i>'), "/", :class=>"btn" %>
-	<%= link_to 'Show', @device, :class => "btn" %>
-	<%= link_to raw('<i class="icon-remove"></i>'), @device, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
+<div class="device-form">
+	<h1>Editing device</h1>
+	
+	<%= render 'form' %>
+	
+	<div class="device-actions">
+		<%= link_to raw('<i class="icon-home"></i>'), "/", :class=>"btn" %>
+		<%= link_to raw('<i class="icon-eye-open"></i>'), @device, :class => "btn" %>
+		<%= link_to raw('<i class="icon-remove"></i>'), @device, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
+	</div>
 </div>
