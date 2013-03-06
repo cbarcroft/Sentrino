@@ -19,6 +19,7 @@
 <% end %>
 <h3>Tasks: <%= link_to 'Schedule Task', new_device_task_path(@device), :class => "btn" %></h3>
 <% @device.tasks.each do |task| %>
+	<% sleep(1) %>
 	<p>
 		<%= task.name %> -
 		<%= task.frequency %> -

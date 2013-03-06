@@ -1,5 +1,5 @@
 class Device < ActiveRecord::Base
-  attr_accessible :nickname, :model, :ip, :user_id
+  attr_accessible :nickname, :model, :ip, :user_id, :port
   
   has_many :actions
   has_many :action_types, :through => :actions
@@ -17,7 +17,7 @@ class Device < ActiveRecord::Base
   PARSE_ERROR_MESSAGE = "Problem decoding response."
 
   def ping
-  	comms =communicateWithDevice("ping");
+    comms =communicateWithDevice("ping");
     if comms
       comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : "Online"
     else
@@ -26,7 +26,7 @@ class Device < ActiveRecord::Base
   end
 
   def temp
-  	comms = communicateWithDevice("temp");
+    comms = communicateWithDevice("temp");
     if comms
       comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : (comms["temp"].to_f / 100).to_s + "&deg;F"
     else
@@ -35,7 +35,7 @@ class Device < ActiveRecord::Base
   end
 
   def humidity
-  	comms = communicateWithDevice("hmdy");
+    comms = communicateWithDevice("hmdy");
     if comms
       comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : (comms["hmdy"].to_f / 100).to_s + "%"
     else
@@ -47,10 +47,11 @@ class Device < ActiveRecord::Base
     def communicateWithDevice(method)
       #return false # Enable this to avoid device timeouts if it is acting up
       begin
-        response = JSON.parse(HTTParty.get("http://#{self.ip}/$$#{method}"));
+        p "Fetching http://#{self.ip}:#{self.port || '80'}/$$#{method}"
+        response = JSON.parse(HTTParty.get("http://#{self.ip}:#{self.port || '80'}/$$#{method}", {:timeout => 5000}));
         return false unless response
         return response["error"] if response["error"]["err"] == true
-		    return response["body"]
+	return response["body"]
       rescue
         return false
       end

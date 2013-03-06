@@ -1,4 +1,5 @@
 class DevicesController < ApplicationController
+  before_filter :is_logged_in?
   before_filter :find_device, :only => [:show, :edit, :update, :destroy]
   
   # GET /devices
@@ -62,10 +63,17 @@ class DevicesController < ApplicationController
   
   private
     def find_device
-      @device = Device.find(params[:id])
+      @device = current_user.devices.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         flash[:alert] = "The device you were looking for could not be found."
         redirect_to devices_path
+    end
+    
+    def is_logged_in?
+      unless !current_user.nil?
+        flash[:notice] = "You must be logged in to view that."
+        redirect_to root_path
+      end
     end
 
     def register_actions(device)

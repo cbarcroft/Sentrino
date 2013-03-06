@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+	before_filter :is_logged_in?
 	before_filter :find_device
 	before_filter :find_task, :only => [:show, :edit, :update, :destroy]
 	before_filter :find_actions_with_types, :only => [:new, :edit]
@@ -42,7 +43,10 @@ class TasksController < ApplicationController
 
 	private
 		def find_device
-			@device = Device.find(params[:device_id])
+			@device = current_user.devices.find(params[:device_id])
+			rescue ActiveRecord::RecordNotFound
+			  flash[:alert] = "The device you were looking for could not be found."
+			  redirect_to devices_path
 		end
 
 		def find_task
@@ -51,5 +55,12 @@ class TasksController < ApplicationController
 
 		def find_actions_with_types
 			@actions_with_types = @device.actions.joins(:action_type)
+		end
+		
+		def is_logged_in?
+		    unless !current_user.nil?
+		    flash[:notice] = "You must be logged in to view that."
+		    redirect_to root_path
+		  end
 		end
 end
