@@ -75,9 +75,11 @@ class TasksController < ApplicationController
 		
 		def is_logged_in?
 		    unless !current_user.nil?
-		    flash[:notice] = "You must be logged in to view that."
-		    redirect_to root_path
-		  end
+		      flash[:notice] = "You must be logged in to view that."
+		      redirect_to root_path
+		    end
+		end
+	    
 
 		def get_active_crons
 			@current_hour = Time.now.strftime("%H").to_i
@@ -86,7 +88,7 @@ class TasksController < ApplicationController
 			return {
 				"1M" => true,
 				"5M" => @current_minute%5 == 0 ? true : false,
-				"30M" => @current_minute%30 == 0 ? true : false.
+				"30M" => @current_minute%30 == 0 ? true : false,
 				"1H" => @current_minute == 0 ? true : false,
 				"12H" => @current_hour%12 == 0 && @current_minute == 0 ? true : false,
 				"24H" => @current_hour == 0 && @current_minute == 0 ? true : false
