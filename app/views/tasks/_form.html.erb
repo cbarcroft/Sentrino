@@ -27,6 +27,10 @@
     <%= f.label :frequency %><br />
     <%= f.select :frequency, [['1 Minute','1M'],['5 Minutes','5M'],['30 Minutes','30M'],['1 Hour', '1H'], ['12 Hours', '12H'],['24 Hours', '24H']] %>
   </div>
+  <div class="field">
+    <%= f.label :result_action %><br />
+    <%= f.select :result_action, [['Email','email'],['Store','store']] %>
+  </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
   </div>
