@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'pg'
 gem 'httparty'
 gem 'json'
 gem 'thin'
@@ -52,3 +52,4 @@ end
 
 gem 'devise', "~> 2.2.2"
 gem 'paperclip', '~> 3.0'
+gem 'aws-sdk'

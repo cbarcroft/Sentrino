@@ -17,10 +17,16 @@
 	:ip => '76.28.236.232')
 @ChrisDevice.save
 
-User.create(
+@ChrisF = User.create(
   :email => 'christopher.d.ferris@gmail.com',
   :password => 'password',
   :password_confirmation => 'password')
+
+@HomeDevice = @ChrisF.devices.build(
+	:nickname => 'Home',
+	:model => 'Uno',
+	:ip => '192.94.9.46')
+@HomeDevice.save
 
 
 # Action Types
