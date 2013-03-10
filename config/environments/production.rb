@@ -65,12 +65,12 @@ Sentrino::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['Sentrino-images'],
-      :access_key_id => ENV['AKIAILJFBFA5UNKLITIQ'],
-      :secret_access_key => ENV['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']
-    }
-  }
+  # config.paperclip_defaults = {
+  #   :storage => :s3,
+  #   :s3_credentials => {
+  #     :bucket => ENV['Sentrino-images'],
+  #     :access_key_id => ENV['AKIAILJFBFA5UNKLITIQ'],
+  #     :secret_access_key => ENV['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']
+  #   }
+  # }
 end
