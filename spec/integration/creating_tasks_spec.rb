@@ -3,19 +3,20 @@ require 'spec_helper'
 feature "Creating Tasks" do
 
 	before do
-		Factory(:user)
-		Factory(:device)
+		@user = Factory(:user)
+		@device = Factory(:device)
+
 		visit '/'
 		click_link 'Sign in'
-		fill_in 'email', :with => 'x@y.z'
-		fill_in 'password', :with => 'password'
+		fill_in 'email', :with => @user.email
+		fill_in 'password', :with => @user.password
 		click_button "Sign in"
 
 		click_link 'Add a Device'
-		fill_in 'device_nickname', :with => 'George'
-		fill_in 'device_model', :with => 'Uno'
-		fill_in 'device_ip', :with => '192.54.43.2'
-		fill_in 'device_port', :with => '8000'
+		fill_in 'device_nickname', :with => @device.nickname
+		fill_in 'device_model', :with => @device.model
+		fill_in 'device_ip', :with => @device.ip
+		fill_in 'device_port', :with => @device.port
 		click_button 'Create Device'
 
 		page.should have_content 'Device was successfully created'
