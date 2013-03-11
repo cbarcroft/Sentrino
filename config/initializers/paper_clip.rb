@@ -1,1 +1,1 @@
-Paperclip::Attachment.default_options[:url] = 'Sentrino-images.s3-website-us-east-1.amazonaws.com'
+Paperclip.options[:command_path] = "/usr/local/bin/identify"

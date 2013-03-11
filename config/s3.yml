@@ -1,0 +1,12 @@
+development:
+  bucket: Sentrino-images
+  access_key_id: AKIAILJFBFA5UNKLITIQ
+  secret_access_key: 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
+production:
+  bucket: Sentrino-images
+  access_key_id: AKIAILJFBFA5UNKLITIQ
+  secret_access_key: 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
+test:
+  bucket: Sentrino-images
+  access_key_id: AKIAILJFBFA5UNKLITIQ
+  secret_access_key: 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
