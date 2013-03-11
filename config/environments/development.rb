@@ -40,7 +40,7 @@ Sentrino::Application.configure do
 
   Paperclip.options[:command_path] = "/usr/local/bin/identify"
 
-    config.paperclip_defaults = {
+  config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
       :bucket => ENV['Sentrino-images'],

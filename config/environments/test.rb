@@ -35,4 +35,12 @@ Sentrino::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['Sentrino-images'],
+      :access_key_id => ENV['AKIAILJFBFA5UNKLITIQ'],
+      :secret_access_key => ENV['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']
+    }
+  }
 end
