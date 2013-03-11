@@ -16,7 +16,7 @@ feature 'Signing in' do
 	end
 
 	scenario 'Signing out' do
-		click_link 'Sign out'
+		click_link 'Logout'
 		page.should have_content("Signed out successfully.")
 	end
 end
