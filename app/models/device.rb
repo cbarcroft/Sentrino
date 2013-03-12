@@ -11,8 +11,7 @@ class Device < ActiveRecord::Base
   has_attached_file :image,
    :storage => :s3,
    :s3_credentials => "config/s3.yml",
-   :path => "/:style/:id/:filename",
-   :default_url => "arduino.png"
+   :path => "/:style/:id/:filename"
 
   @ip_regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
   validates :ip, :presence => true,
