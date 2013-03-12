@@ -5,7 +5,6 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
 gem 'httparty'
 gem 'json'
 gem 'thin'
@@ -40,6 +39,9 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+group :production do
+  gem 'pg'
+end
 
 group :test, :development do
 	gem 'rspec-rails', '~> 2.11'
