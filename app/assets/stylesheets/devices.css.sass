@@ -1,13 +1,42 @@
 .device-form
 	@extend .pretty-form
 
+#device_image
+	clear: both
+	margin-bottom: 1em
+
+#device_ip,
+#port_label,
+#device_port
+	float: left
+
+#device_ip
+	width: 62%
+
+#port_label
+	padding: 3% 3% 0
+	font-size: 1.2em
+
+#device_port
+	width: 27%
+
+.field,
+.actions
+	clear: both
+
 /* Show
    ========================================================================== */
 
 #device-show
-	@include clearfix
-	@include full-width
+	position: absolute
+	top: 0
+	bottom: 0
 	width: 100%
+	@include full-width
+	display: block
+	padding: 0
+	margin-top: 57px
+	height: 100%
 
 	h1,
 	h2
@@ -21,15 +50,25 @@
 
 #primary
 	@include box-sizing(border-box)
-	width: 30%
-	padding: 0 5% 0 0
+	width: 25%
+	height: 100%
+	padding: 0 5% 0
+
+	-webkit-box-shadow: inset -10px 0 6px -6px rgba(0, 0, 30, 0.1)
+	-moz-box-shadow: inset -10px 0 6px -6px rgba(0, 0, 30, 0.1)
+	box-shadow: inset -10px 0 6px -6px rgba(0, 0, 30, 0.1)
 
 	.device-actions a
 		display: block
 		margin-bottom: 5px
 
 #tasks
-	width: 70%
+	position: relative
+	padding-left: 5%
+	border-left: 1px solid #ddd
+	background: #fff
+	width: 75%
+	height: 100% 
 
 	h2
 		float: left
