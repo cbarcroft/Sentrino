@@ -44,12 +44,7 @@ class DevicesController < ApplicationController
   # PUT /devices/1
   def update
     if @device.update_attributes(params[:device])
-      @device.actions.destroy_all
-      if register_actions(@device)
-        redirect_to @device, notice: 'Device was successfully updated. Actions were automatically re-registered.'
-      else
-        redirect_to @device, notice: 'Device was successfully updated. Actions were not automatically re-registered.'
-      end
+      redirect_to @device, notice: 'Device was successfully updated.'
     else
       render action: "edit" 
     end

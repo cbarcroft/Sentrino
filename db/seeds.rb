@@ -30,11 +30,9 @@
 
 
 # Action Types
-actiontypes = ActionType.create([
-		{:name => "Ping", :route => "ping"},
-		{:name => "Temperature", :route => "temp"},
-		{:name => "Humidity", :route => "humidity"}
-	])
+ActionType.create(:name => "Ping", :route => "ping") unless ActionType.where('name = ?', ["Ping"]).first
+ActionType.create(:name => "Temperature", :route => "temp") unless ActionType.where('name = ?', ["Temperature"]).first
+ActionType.create(:name => "Humidity", :route => "humidity") unless ActionType.where('name = ?', ["Humidity"]).first
 
 #Associate Action Types to Devices
 @ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Ping'").first.id).save
