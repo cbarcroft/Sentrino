@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418194520) do
+ActiveRecord::Schema.define(:version => 20130418234118) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
-    t.string   "route"
+    t.string   "method"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(:version => 20130418194520) do
     t.datetime "image_updated_at"
   end
 
+  create_table "log", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "log_text"
+    t.string   "log_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sensor_types", :force => true do |t|
     t.string   "name"
     t.string   "method"
@@ -63,17 +71,31 @@ ActiveRecord::Schema.define(:version => 20130418194520) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "task_actions", :force => true do |t|
+    t.integer  "task_id"
+    t.integer  "action_id"
+    t.string   "parameters"
+    t.string   "post_action"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "task_sensors", :force => true do |t|
+    t.integer  "task_id"
+    t.integer  "sensor_id"
+    t.string   "post_action"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.string   "frequency"
-    t.integer  "action_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "device_id"
-    t.string   "result_action"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "log_type"
   end
-
-  add_index "tasks", ["action_id"], :name => "index_tasks_on_action_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

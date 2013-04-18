@@ -1,12 +1,10 @@
 class Task < ActiveRecord::Base
-  belongs_to :action
-  has_one :action_type, :through => :action
-  belongs_to :device
+  belongs_to :user
+  has_many :task_action
+  has_many :task_sensor
 
-  attr_accessible :frequency, :name, :action_id, :result_action
+  attr_accessible :frequency, :name
 
   validates :name,  :presence => true
   validates :frequency,  :presence => true
-  validates :action_id,  :presence => true
-  validates :result_action,  :presence => true, :inclusion => { :in => %w(email store), :message => "%{value} is not a valid choice." }
 end
