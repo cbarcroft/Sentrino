@@ -3,6 +3,10 @@ class Device < ActiveRecord::Base
 
   has_many :actions
   has_many :action_types, :through => :actions
+
+  has_many :sensors
+  has_many :sensor_types, :through => :sensors
+
   has_many :tasks
   belongs_to :user
  
@@ -21,28 +25,28 @@ class Device < ActiveRecord::Base
   UNSUPPORTED_METHOD_MESSAGE = "Unsupported on this device."
   PARSE_ERROR_MESSAGE = "Problem decoding response."
 
-  def ping
-    comms =communicateWithDevice("ping");
-    if comms
-      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : "Online"
+  def status
+    response =communicateWithDevice("ping");
+    if response
+      response["err"] ? UNSUPPORTED_METHOD_MESSAGE : "Online"
     else
       return PARSE_ERROR_MESSAGE
     end
   end
 
   def temp
-    comms = communicateWithDevice("temp");
-    if comms
-      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : (comms["temp"].to_f / 100).to_s + "&deg;F"
+    response = communicateWithDevice("temp");
+    if response
+      response["err"] ? UNSUPPORTED_METHOD_MESSAGE : (response["temp"].to_f / 100).to_s + "&deg;F"
     else
       return PARSE_ERROR_MESSAGE
     end
   end
 
   def humidity
-    comms = communicateWithDevice("hmdy");
-    if comms
-      comms["err"] ? UNSUPPORTED_METHOD_MESSAGE : (comms["hmdy"].to_f / 100).to_s + "%"
+    response = communicateWithDevice("hmdy");
+    if response
+      response["err"] ? UNSUPPORTED_METHOD_MESSAGE : (response["hmdy"].to_f / 100).to_s + "%"
     else
       return PARSE_ERROR_MESSAGE
     end

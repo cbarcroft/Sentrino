@@ -9,10 +9,10 @@ class DevicesController < ApplicationController
 
   # GET /devices/1
   def show
-    @action_replies = {}
-    @device.action_types.each do |action_type|
-      reply = @device.send(action_type.route)
-      @action_replies[action_type.name] = reply ? reply : "N/A" 
+    @sensor_replies = {}
+    @device.sensor_types.each do |sensor_type|
+      reply = @device.send(sensor_type.method)
+      @sensor_replies[sensor_type.name] = reply ? reply : "N/A" 
     end
 
     @tasks = @device.tasks  
@@ -31,10 +31,10 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(params[:device].merge :user_id => current_user[:id])
     if @device.save
-      if register_actions(@device)
-        redirect_to @device, notice: 'Device was successfully created, and its actions have been automatically registered.' 
+      if register_sensors(@device)
+        redirect_to @device, notice: 'Device was successfully created, and its sensors have been automatically registered.' 
       else
-        redirect_to @device, notice: 'Device was successfully created.  We were not able to automatically register actions for the device.'
+        redirect_to @device, notice: 'Device was successfully created.  We were not able to automatically register sensors for the device.'
       end
     else
       render action: "new" 
@@ -71,13 +71,13 @@ class DevicesController < ApplicationController
       end
     end
 
-    def register_actions(device)
-      ActionType.all.each do |actiontype|
-        reply = device.send(actiontype[:route])
+    def register_sensors(device)
+      SensorType.all.each do |sensortype|
+        reply = device.send(sensortype[:method])
         if reply != "Problem decoding response."
-          @action = device.actions.build
-          @action[:action_type_id] = actiontype[:id]
-          @action.save
+          @sensor = device.sensors.build
+          @sensor[:action_type_id] = sensortype[:id]
+          @sensor.save
         end
       end
       return true

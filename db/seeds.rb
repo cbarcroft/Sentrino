@@ -30,13 +30,13 @@
 
 
 # Action Types
-ActionType.create(:name => "Ping", :route => "ping") unless ActionType.where('name = ?', ["Ping"]).first
-ActionType.create(:name => "Temperature", :route => "temp") unless ActionType.where('name = ?', ["Temperature"]).first
-ActionType.create(:name => "Humidity", :route => "humidity") unless ActionType.where('name = ?', ["Humidity"]).first
+SensorType.create(:name => "Status", :method => "status") unless SensorType.where('name = ?', ["Status"]).first
+SensorType.create(:name => "Temperature", :method => "temp") unless SensorType.where('name = ?', ["Temperature"]).first
+SensorType.create(:name => "Humidity", :method => "humidity") unless SensorType.where('name = ?', ["Humidity"]).first
 
 #Associate Action Types to Devices
-@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Ping'").first.id).save
-@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Temperature'").first.id).save
-@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Humidity'").first.id).save
+@ChrisDevice.actions.build(:action_type_id => SensorType.where("name = 'Status'").first.id).save
+@ChrisDevice.actions.build(:action_type_id => SensorType.where("name = 'Temperature'").first.id).save
+@ChrisDevice.actions.build(:action_type_id => SensorType.where("name = 'Humidity'").first.id).save
 
 

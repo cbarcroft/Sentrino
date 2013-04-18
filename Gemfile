@@ -26,6 +26,9 @@ group :test, :development do
 end
 
 group :development do
+  gem 'better_errors', '0.8.0'
+    gem 'binding_of_caller', '0.7.1'
+    gem 'meta_request', '0.2.3'
   gem 'quiet_assets', '~> 1.0.2', :group => :development
 end
 

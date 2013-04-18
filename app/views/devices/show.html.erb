@@ -9,7 +9,7 @@
 		<p><b>Ip:</b> <%= @device.ip %></p>
 
 		<div class="action-replies">
-			<% @action_replies.each do |name, reply|%>
+			<% @sensor_replies.each do |name, reply|%>
 				<%= name %>: <%= reply.html_safe %><br />
 			<% end %>
 		</div>
