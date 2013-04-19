@@ -2,19 +2,6 @@
 	<div class="welcome">
 		<h1>Welcome, <%= current_user.email %>!</h1>
 	</div>
-	
-	<div class="tasks-container">
-		<h2>Upcoming tasks</h2>
-
-		<ul>
-			<% all_tasks(current_user).each do |task|%>
-				<li>
-					<%= link_to task.device.nickname, task.device %> - <%= task.name %>.  
-					Frequency: <%= task.frequency %>
-				</li>
-			<% end %>
-		</ul>
-	</div>
 
 	<div class="device-list-head">
 		<h2>Your devices</h2>

@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   has_many :devices, :foreign_key => 'user_id'
+  has_many :tasks, :foreign_key => 'user_id'
 end

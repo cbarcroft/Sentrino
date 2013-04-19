@@ -1,11 +1,10 @@
 class TasksController < ApplicationController
 	before_filter :is_logged_in?
-	before_filter :find_device
 	before_filter :find_task, :only => [:show, :edit, :update, :destroy]
-	before_filter :find_actions_with_types, :only => [:new, :create, :edit, :update]
 
 	def new
-		@task = @device.tasks.build
+		@task = current_user.tasks.build
+		@devices = current_user.devices
 	end
 	
 	def create
@@ -58,19 +57,9 @@ class TasksController < ApplicationController
 	end
 
 	private
-		def find_device
-			@device = current_user.devices.find(params[:device_id])
-			rescue ActiveRecord::RecordNotFound
-			  flash[:alert] = "The device you were looking for could not be found."
-			  redirect_to devices_path
-		end
 
 		def find_task
-			@task = @device.tasks.find(params[:id])
-		end
-
-		def find_actions_with_types
-			@actions_with_types = @device.actions.joins(:action_type)
+			@task = Task.find(params[:id])
 		end
 		
 		def is_logged_in?
