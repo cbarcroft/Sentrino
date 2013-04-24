@@ -24,12 +24,12 @@
         <%= link_to raw('<i class="icon-pencil"></i><span>Edit</span>'),
         edit_device_path(device),
         :rel => "tooltip", :title => "Edit" %>
-        
-        <%= link_to raw('<i class="icon-eye-open"></i><span>Show</span>'),
-        device,
-        :rel => "tooltip",
-        :title => "Show" %>
 
+        <%= link_to raw('<i class="icon-eye-open"></i><span>Show</span>'), device,
+        :rel => "tooltip", :title => "Show" %>
+        
+        <%= link_to raw('<i class="icon-wrench"></i><span>New Task</span>'), new_user_task_path(current_user),
+        :rel => "tooltip", :title => "New Task" %>
       </footer>
     </div>
   
