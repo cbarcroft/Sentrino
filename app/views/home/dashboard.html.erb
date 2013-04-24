@@ -1,25 +1,10 @@
 <section class="dashboard-wrap">
 	<div class="welcome">
-		<h1>Welcome, <%= current_user.email %>!</h1>
+		<h1>Welcome, <%= current_user.email %></h1>
 	</div>
 
 	<div class="device-list-head">
 		<h2>Your devices</h2>
-
-		<div class="device-list-options">
-			<a id="devices-block-view" href="#" title="Block View" rel="tooltip"
-			data-placement="top">
-				<i class="icon-th-large"></i>
-			</a>
-			<a id="devices-list-view" href="#" title="List View" rel="tooltip"
-			data-placement="top">
-				<i class="icon-reorder"></i>
-			</a>
-			<a id="devices-tiled-view" href="#" title="Tiled View" rel="tooltip"
-			data-placement="top">
-				<i class="icon-th"></i>
-			</a>
-		</div>
 	</div>
 
 	<%= render :template => "devices/index" %>

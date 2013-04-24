@@ -5,10 +5,6 @@
     <div class="inner">
       <div class="device-info">
         <h3><%= link_to device.nickname, device %></h3>
-    
-        <div class="device-image">
-          <%= image_tag device.image.url %>
-        </div>
           
         <ul>
           <li>
@@ -24,12 +20,16 @@
 
       </div>
       <footer class="device-buttons">
-        <%= link_to raw('<i class="icon-pencil"></i><span>Edit</span>'), edit_device_path(device),
+
+        <%= link_to raw('<i class="icon-pencil"></i><span>Edit</span>'),
+        edit_device_path(device),
         :rel => "tooltip", :title => "Edit" %>
-        <%= link_to raw('<i class="icon-eye-open"></i><span>Show</span>'), device,
-        :rel => "tooltip", :title => "Show" %>
-        <%= link_to raw('<i class="icon-wrench"></i><span>New Task</span>'), new_device_task_path(device),
-        :rel => "tooltip", :title => "New Task" %>
+        
+        <%= link_to raw('<i class="icon-eye-open"></i><span>Show</span>'),
+        device,
+        :rel => "tooltip",
+        :title => "Show" %>
+
       </footer>
     </div>
   
