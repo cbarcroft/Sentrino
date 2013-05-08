@@ -1,10 +1,8 @@
 <fieldset>
-  <%= f.label :content, "Question" %><br />
-  <%= f.text_area :content %><br />
+  <%= f.label :sensor_id, "Sensor" %><br />
+  <%= f.text_field :sensor_id %><br />
+  <%= f.label :post_action, "Do this with result:" %><br />
+  <%= f.text_field :post_action %><br />
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove" %>
-  <%= f.fields_for :answers do |builder| %>
-    <%= render 'answer_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_fields "Add Answer", f, :answers %>
 </fieldset>

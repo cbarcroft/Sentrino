@@ -8,10 +8,10 @@ class TasksController < ApplicationController
 	end
 	
 	def create
-		@task = @device.tasks.build(params[:task])
+		@task = current_user.tasks.build(params[:task])
 		if @task.save
 			flash[:notice] = "Task has been scheduled."
-			redirect_to @device
+			redirect_to @task
 		else
 			flash[:alert] = "Task has not been scheduled."
 			render :action => "new"
@@ -22,6 +22,8 @@ class TasksController < ApplicationController
 	end
 
 	def edit
+		@user_sensors = current_user.devices.flat_map { |device| device.sensors.flat_map { |sensor| sensor } }
+		@user_actions = current_user.devices.flat_map { |device| device.actions.flat_map { |action| action } }
 	end
 	
 	def update
