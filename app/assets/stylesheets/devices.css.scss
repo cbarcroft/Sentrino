@@ -1,0 +1,55 @@
+.device-form {
+	@extend .pretty-form;	
+}
+
+#device_image {
+	clear: both;
+	margin-bottom: 1em;
+}
+
+#device_ip,
+#port_label,
+#device_port {
+	float: left;
+}
+
+#device_ip {
+	width: 62%;
+}
+
+#port_label {
+	padding: 3% 3% 0;
+	font-size: 1.2em;
+}
+	
+#device_port {
+	width: 27%;
+}
+
+.field,
+.actions {
+	clear: both;	
+}
+
+/* Edit
+   ========================================================================== */
+
+.device-actions {
+	display: block;
+	margin: 1.1em 0 0;
+	font-weight: 300;
+
+	i {
+		font-size: 1.1em;
+	}
+
+	a {
+		color: #333;
+
+		&:hover {
+			text-decoration: none;
+			color: #555;
+		}
+	}
+}
+
