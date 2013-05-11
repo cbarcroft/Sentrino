@@ -25,6 +25,8 @@ class Device < ActiveRecord::Base
   UNSUPPORTED_METHOD_MESSAGE = "Unsupported on this device."
   PARSE_ERROR_MESSAGE = "Problem decoding response."
 
+  # Methods related to actual device communications below
+
   def status
     response =communicateWithDevice("ping");
     if response

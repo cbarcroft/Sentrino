@@ -22,8 +22,6 @@ class TasksController < ApplicationController
 	end
 
 	def edit
-		@user_sensors = current_user.devices.flat_map { |device| device.sensors.flat_map { |sensor| sensor } }
-		@user_actions = current_user.devices.flat_map { |device| device.actions.flat_map { |action| action } }
 	end
 	
 	def update
