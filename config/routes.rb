@@ -12,10 +12,12 @@ Sentrino::Application.routes.draw do
 
   resources :index
   resources :application
+  
   resources :devices do
     resources :actions
     resources :sensors
   end
+
   resources :users do
     resources :tasks
   end

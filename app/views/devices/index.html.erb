@@ -4,6 +4,7 @@
   
     <div class="inner">
       <div class="device-info">
+
         <h3><%= link_to device.nickname, device %></h3>
           
         <ul>
@@ -18,18 +19,28 @@
           </li>
         </ul>
 
+        <div><b>Status:</b> Offline</div>
+        <div><b>Temp:</b> 73.4&deg;</div>
+        <div><b>Hum:</b> 73.4&deg;</div>
+        <div><b>Mow the lawn</b> - 28m</div>
+        <div><b>Take temp</b> - 12h</div>
+        <div><b>Check humidity</b> - 10m</div>
+
       </div>
+
       <footer class="device-buttons">
 
-        <%= link_to raw('<i class="icon-pencil"></i><span>Edit</span>'),
-        edit_device_path(device),
-        :rel => "tooltip", :title => "Edit" %>
+        <%= link_to do %>
+        <i class="icon-refresh"></i>
+        <% end %>
 
-        <%= link_to raw('<i class="icon-eye-open"></i><span>Show</span>'), device,
-        :rel => "tooltip", :title => "Show" %>
-        
-        <%= link_to raw('<i class="icon-wrench"></i><span>New Task</span>'), new_user_task_path(current_user),
-        :rel => "tooltip", :title => "New Task" %>
+        <button class="btn">Control</button>
+
+        <%= link_to edit_device_path(device), :rel => "tooltip", :title => "Edit" do %>
+          <i class="icon-pencil"></i>
+          <span>Edit</span>  
+        <% end %>
+
       </footer>
     </div>
   

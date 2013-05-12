@@ -15,19 +15,23 @@
     <%= f.label :nickname %>
     <%= f.text_field :nickname %>
   </div>
+
   <div class="field">
     <%= f.label :model %>
     <%= f.text_field :model %>
   </div>
+
   <div class="field">
     <%= f.label :ip %>
     <%= f.text_field :ip %>
     <label for="port" id="port_label">:</label><%= f.text_field :port, :placeholder => 'port (optional)' %>
   </div>
+
   <div class="field">
     <%= f.label :image %>
     <%= f.file_field :image %>
   </div>
+  
   <div class="actions">
     <%= f.submit :class => "btn btn-primary btn-large" %>
   </div>
