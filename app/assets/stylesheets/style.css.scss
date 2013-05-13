@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Global
+   ========================================================================== */
+
 html,
 body {
 	background: #fafafa;
@@ -13,10 +17,8 @@ h4 {
 	font-family: $header-font;	
 }
 
-// Safari
-::selection { background: #F2905B }
-// Firefox
-::-moz-selection { background: #F2905B }
+::selection { background: #F2905B } 	 // Safari
+::-moz-selection { background: #F2905B } // Firefox
 
 a {
 	color: $link-color;
@@ -30,14 +32,24 @@ a {
 .clear  { clear: both }
 .center { text-align: center }
 
+.half-column {
+	float: left;
+	width: 50%;
+}
+
+.alert {
+	margin: 0;
+	@include full-width;
+}
+
+.block-center {
+	display: block;
+	margin: 0 auto;
+}
 
 /* ==========================================================================
-   Layout
+   Header
    ========================================================================== */
-
-#overview {
-	background: transparent;
-}
 
 #container {
 	padding: 0 $page-gutter;
@@ -58,25 +70,6 @@ a {
 	.navbar-inner {
 		padding: 0.5em 2.5em;
 		background: #444;
-	}
-}
-
-.alert {
-	margin: 0;
-	@include full-width;
-}
-
-.header-wrap {
-	@include clearfix;
-
-	h1,
-	h2,
-	div {
-		float: left;		
-	}
-
-	.new-device {
-		margin-left: 1em;		
 	}
 }
 
@@ -103,4 +96,10 @@ a {
 	text-align: center;
 	font-size: 0.9em;
 }
+
+/* ==========================================================================
+   Splash page
+   ========================================================================== */
+
+#overview { background: transparent; }
 

@@ -1,49 +1,7 @@
 <div class="device-list">
   <% @devices.each do |device| %>
-  <article class="device-list-item">
-  
-    <div class="inner">
-      <div class="device-info">
+    
+    <%= render :partial => 'devices/list_item', :locals => { :device => device } %>
 
-        <h3><%= link_to device.nickname, device %></h3>
-          
-        <ul>
-          <li>
-            <b>Model:</b>
-            <p><%= device.model %></p>
-          </li>
-
-          <li>
-            <b>Ip:</b>
-            <p><%= device.ip %></p>
-          </li>
-        </ul>
-
-        <div><b>Status:</b> Offline</div>
-        <div><b>Temp:</b> 73.4&deg;</div>
-        <div><b>Hum:</b> 73.4&deg;</div>
-        <div><b>Mow the lawn</b> - 28m</div>
-        <div><b>Take temp</b> - 12h</div>
-        <div><b>Check humidity</b> - 10m</div>
-
-      </div>
-
-      <footer class="device-buttons">
-
-        <%= link_to do %>
-        <i class="icon-refresh"></i>
-        <% end %>
-
-        <button class="btn">Control</button>
-
-        <%= link_to edit_device_path(device), :rel => "tooltip", :title => "Edit" do %>
-          <i class="icon-pencil"></i>
-          <span>Edit</span>  
-        <% end %>
-
-      </footer>
-    </div>
-  
-  </article>
   <% end %>
 </div>
