@@ -1,8 +1,8 @@
 <fieldset>
   <%= f.label :sensor_id, "Sensor" %><br />
-  <%= f.collection_select(:task_sensor, :sensor_id, current_user.sensors, :nickname)%><br />
+  <%= f.collection_select(:sensor_id, current_user.sensors, :id, :combined_name)%><br />
   <%= f.label :post_action, "Do this with result:" %><br />
-  <%= f.text_field :post_action %><br />
+  <%= f.select :post_action, [['Log','log'],['Email','email']] %>
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove" %>
 </fieldset>

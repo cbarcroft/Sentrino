@@ -1,10 +1,10 @@
 <fieldset>
   <%= f.label :action_id, "Action" %><br />
-  <%= f.text_field :action_id %><br />
+  <%= f.collection_select(:action_id, current_user.actions, :id, :combined_name)%><br />
   <%= f.label :parameters, "Parameters" %><br />
   <%= f.text_field :parameters %><br />
   <%= f.label :post_action, "Do this with result:" %><br />
-  <%= f.text_field :post_action %><br />
+  <%= f.select :post_action, [['Log','log'],['Email','email']] %>
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove" %>
 </fieldset>

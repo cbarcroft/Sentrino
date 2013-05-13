@@ -4,18 +4,13 @@ class Device < ActiveRecord::Base
   has_many :actions
   has_many :action_types, :through => :actions
 
-  has_many :sensors
+  has_many :sensors 
   has_many :sensor_types, :through => :sensors
 
   has_many :tasks
   belongs_to :user
  
   validates :model,  :presence => true
-
-  has_attached_file :image,
-   :storage => :s3,
-   :s3_credentials => "config/s3.yml",
-   :path => "/:style/:id/:filename"
 
   @ip_regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
   validates :ip, :presence => true,
@@ -28,7 +23,7 @@ class Device < ActiveRecord::Base
   # Methods related to actual device communications below
 
   def status
-    response =communicateWithDevice("ping");
+    response = communicateWithDevice("ping");
     if response
       response["err"] ? UNSUPPORTED_METHOD_MESSAGE : "Online"
     else
@@ -62,7 +57,7 @@ class Device < ActiveRecord::Base
         response = JSON.parse(HTTParty.get("http://#{self.ip}:#{self.port || '80'}/$$#{method}", {:timeout => 5000}));
         return false unless response
         return response["error"] if response["error"]["err"] == true
-	return response["body"]
+	      return response["body"]
       rescue
         return false
       end

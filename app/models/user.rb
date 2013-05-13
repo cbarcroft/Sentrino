@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   
   has_many :devices, :foreign_key => 'user_id'
   has_many :tasks, :foreign_key => 'user_id'
-  has_many :sensors, :through => :devices, :select => 'sensors.*,devices.*'
-  has_many :actions, :through => :devices, :select => 'actions.*,devices.*'
+  has_many :sensors, :through => :devices, :select => 'sensors.*,devices.nickname'
+  has_many :actions, :through => :devices, :select => 'actions.*,devices.nickname'
 
 end
