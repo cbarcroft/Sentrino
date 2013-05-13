@@ -32,16 +32,15 @@ $(document).ready ->
 		return if $(event.target).closest("#settings-dropdown").length > 0
 		$("#settings-dropdown").remove()
 
-initTooltips = ($element) ->
-	if $.session.get("device-layout") == "list-view"
-		$.each $('.device-buttons a'), (key, value) ->
-			$(value).tooltip('destroy')
-	else
-		$element = $("[rel='tooltip']") if $element is undefined
-		$element.tooltip
-			placement: "bottom",
-			trigger: "hover",
-			delay: { show: 350, hide: 100 }
+##
+# Initialize bootstrap tooltips
+##
+initTooltips = ->
+	$element = $("[rel='tooltip']")
+	$element.tooltip
+		placement: "bottom",
+		trigger: "hover",
+		delay: { show: 350, hide: 100 }
 
 
 
