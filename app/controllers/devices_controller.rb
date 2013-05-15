@@ -15,7 +15,7 @@ class DevicesController < ApplicationController
       @sensor_replies[sensor_type.name] = reply ? reply : "N/A" 
     end
 
-    @tasks = @device.tasks  
+    @tasks = current_user.tasks  
   end
 
   # GET /devices/new

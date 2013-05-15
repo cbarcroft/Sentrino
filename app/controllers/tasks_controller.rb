@@ -8,10 +8,10 @@ class TasksController < ApplicationController
 	end
 	
 	def create
-		@task = @device.tasks.build(params[:task])
+		@task = current_user.tasks.build(params[:task])
 		if @task.save
 			flash[:notice] = "Task has been scheduled."
-			redirect_to @device
+			redirect_to user_task_path(current_user, @task)
 		else
 			flash[:alert] = "Task has not been scheduled."
 			render :action => "new"

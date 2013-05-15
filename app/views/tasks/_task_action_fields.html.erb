@@ -1,10 +1,10 @@
 <fieldset>
-  <%= f.label :content, "Question" %><br />
-  <%= f.text_area :content %><br />
+  <%= f.label :action_id, "Action" %><br />
+  <%= f.collection_select(:action_id, current_user.actions, :id, :combined_name)%><br />
+  <%= f.label :parameters, "Parameters" %><br />
+  <%= f.text_field :parameters %><br />
+  <%= f.label :post_action, "Do this with result:" %><br />
+  <%= f.select :post_action, [['Log','log'],['Email','email']] %>
   <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove Question" %>
-  <%= f.fields_for :answers do |builder| %>
-    <%= render 'answer_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_fields "Add Answer", f, :answers %>
+  <%= f.label :_destroy, "Remove" %>
 </fieldset>

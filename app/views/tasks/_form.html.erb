@@ -21,13 +21,21 @@
     <%= f.select :frequency, [['1 Minute','1M'],['5 Minutes','5M'],['30 Minutes','30M'],['1 Hour', '1H'], ['12 Hours', '12H'],['24 Hours', '24H']] %>
   </div>
 
-  <%= f.fields_for :task_sensors do |builder| %>
-    <%= render 'task_sensor_fields', f: builder %>
-  <% end %>
+  <div class="dynamic-field-container">
+    <h3>Sensors</h3>
+    <%= link_to_add_fields "Add Sensor", f, :task_sensors %>
+    <%= f.fields_for :task_sensors do |builder| %>
+      <%= render 'task_sensor_fields', f: builder %>
+    <% end %>
+  </div>
 
-  <%= f.fields_for :task_actions do |builder| %>
-    <%= render 'task_action_fields', f: builder %>
-  <% end %>
+  <div class="dynamic-field-container">
+    <h3>Actions</h3>
+    <%= link_to_add_fields "Add Action", f, :task_actions %>
+    <%= f.fields_for :task_actions do |builder| %>
+      <%= render 'task_action_fields', f: builder %>
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>

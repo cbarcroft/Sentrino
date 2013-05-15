@@ -5,7 +5,7 @@ class Task < ActiveRecord::Base
   accepts_nested_attributes_for :task_actions, allow_destroy: true
   accepts_nested_attributes_for :task_sensors, allow_destroy: true
 
-  attr_accessible :frequency, :name, :log_type
+  attr_accessible :frequency, :name, :log_type, :task_actions_attributes, :task_sensors_attributes
 
   validates :name,  :presence => true
   validates :frequency,  :presence => true

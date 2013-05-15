@@ -1,0 +1,48 @@
+<div id="device-show">
+	<div id="primary">
+
+		<div class="device-image"></div>
+
+		<h1><%= @device.nickname %></h1>
+
+		<p><b>Model:</b> <%= @device.model %></p>
+		<p><b>Ip:</b> <%= @device.ip %></p>
+
+		<div class="action-replies">
+			<% @sensor_replies.each do |name, reply|%>
+				<%= name %>: <%= reply.html_safe %><br />
+			<% end %>
+		</div>
+
+		<div class="device-actions">
+			<%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_device_path(@device) %>
+			<%= link_to raw('<i class="icon-remove"></i> Remove'), @device, method: :delete,
+			data: { confirm: 'Are you sure you want to delete this device?' },
+			:class => "danger" %>
+		</div>
+
+	</div>
+
+	<div id="tasks">
+		<div class="header-wrap">
+			<h2>Tasks</h2>
+		</div>
+		
+		<% @tasks.each do |task| %>
+			<div class="task-list-item">
+				<h4><%= task.name %></h4>
+				<%= task.frequency %> -
+				<%= task.action_type.name %>
+				<%= link_to raw('<i class="icon-pencil"></i>'), edit_polymorphic_path([@device, task]) %>
+			</div>
+			<% sleep(1) %>
+		<% end %>
+
+		<div class="new-task">
+			<%= link_to "New Task", new_device_task_path(@device), :class => "btn btn-primary btn-large" %>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+
+</div>

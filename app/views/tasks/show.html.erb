@@ -1,0 +1,12 @@
+<%= @task.name %><br />
+<%= @task.frequency %><br />
+
+Tasks<br />
+<% @task.task_actions.each do |task_action|%>
+  <%= task_action.action_id %><br />
+<% end %>
+
+Sensors<br />
+<% @task.task_sensors.each do |task_sensor|%>
+  <%= task_sensor.sensor_id %><br />
+<% end %>
