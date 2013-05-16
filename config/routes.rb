@@ -2,6 +2,8 @@ Sentrino::Application.routes.draw do
  
 	root :to => "home#index"
 
+  match '/users/:user_id/tasks/home' => 'tasks#home'
+
   devise_for :users, :path => 'accounts', :skip => [:sessions]
   as :user do
     get 'sign_in' => 'devise/sessions#new', :as => :new_user_session

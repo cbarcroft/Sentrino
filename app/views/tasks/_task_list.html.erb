@@ -1,0 +1,7 @@
+<ul id="task_list">
+	<% @tasks.each do |task| %>
+		<li class="task-list-item" data-id="<%= task.id %>">
+			<%= task.name %>
+		</li>
+	<% end %>
+</ul>

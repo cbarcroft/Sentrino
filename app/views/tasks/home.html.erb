@@ -1,0 +1,7 @@
+<%= content_tag "section", id: "task_form", class: "task-form", data: {new_url: new_user_task_path(current_user), edit_url: user_path(current_user) + "/tasks/?/edit"} do %>
+
+<% end %>
+
+<%= content_tag "section", id: "task_index", class: "task-form", data: {new_url: user_tasks_path(current_user)} do %>
+
+<% end %>

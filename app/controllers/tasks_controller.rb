@@ -2,36 +2,65 @@ class TasksController < ApplicationController
 	before_filter :is_logged_in?
 	before_filter :find_task, :only => [:show, :edit, :update, :destroy]
 
+	def home
+		@tasks = current_user.tasks
+		@devices = current_user.devices
+	end
+
+	#ajax
+	def index
+		@tasks = current_user.tasks
+
+		render :partial => "task_list"
+	end
+
+	#ajax
 	def new
 		@task = current_user.tasks.build
 		@devices = current_user.devices
+
+		render :partial => "form" 
 	end
 	
+	#ajax
 	def create
 		@task = current_user.tasks.build(params[:task])
-		if @task.save
-			flash[:notice] = "Task has been scheduled."
-			redirect_to user_task_path(current_user, @task)
-		else
-			flash[:alert] = "Task has not been scheduled."
-			render :action => "new"
-		end
-	end
 
-	def show
+		if @task.save
+			@status = {
+				:status => true,
+				:message => "Task has been scheduled.",
+				:task => @task
+			}
+		else
+			@status = {
+				:status => false,
+				:message => "Task has not been scheduled.",
+				:task => nil
+			}
+		end
+		render :json => @status
 	end
 
 	def edit
+		render :partial => "form" 
 	end
 	
 	def update
 		if @task.update_attributes(params[:task])
-			flash[:notice] = "Task has been updated."
-			redirect_to @device
+			@status = {
+				:status => true,
+				:message => "Task has been updated.",
+				:task => @task
+			}
 		else
-			flash[:alert] = "Task has not been updated."
-			render :action => "edit"
+			@status = {
+				:status => false,
+				:message => "Task has not been updated.",
+				:task => nil
+			}
 		end
+		render :json => @status
 	end
 
 	def destroy

@@ -1,8 +1,1 @@
-<div class="task-form">
-	<h1>Editing Task</h1>
-	
-	<%= render 'form' %>
-	
-	<%= link_to 'Back', "/", :class=>"btn" %>
-	<%= link_to 'Delete', [current_user, @task], method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %>
-</div>
+<%= render "form" %>
