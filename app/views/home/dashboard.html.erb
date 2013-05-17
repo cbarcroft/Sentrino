@@ -10,5 +10,5 @@
 	<%= render :template => "devices/index" %>
 	
 	<%= link_to 'Add a Device', new_device_path, :class => "btn btn-primary btn-large" %>
-	<%= link_to 'Tasks', user_tasks_path(current_user), :class => "btn btn-primary btn-large" %>
+	<%= link_to 'Tasks', user_path(current_user) + "/tasks/home", :class => "btn btn-primary btn-large" %>
 </section>

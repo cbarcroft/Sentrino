@@ -77,9 +77,9 @@ class TasksController < ApplicationController
 			if @active_crons[task.frequency]
 				result = task.device.send(task.action_type)
 				if task.result_action == "email"
-					#task.device.user.email
+					#TODO
 				elsif task.result_action == "store"
-					#store as a result object (need to create)
+					#TODO
 				end
 			end
 		end
