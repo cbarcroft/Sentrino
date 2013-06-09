@@ -7,4 +7,12 @@ class Sensor < ActiveRecord::Base
  	def combined_name
  		self.device.nickname + " | " + self.sensor_type.name
  	end
+
+ 	def name
+ 		self.sensor_type.name
+ 	end
+
+ 	def method
+ 		self.sensor_type.method
+ 	end
 end

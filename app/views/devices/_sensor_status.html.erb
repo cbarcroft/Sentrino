@@ -1,0 +1,3 @@
+<% @device.sensors.each do |sensor| %>
+	<li><b><%= sensor.name %>:</b> <%= @device.send(sensor.method).html_safe %></li>
+<% end %>

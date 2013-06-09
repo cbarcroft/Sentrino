@@ -3,6 +3,7 @@ Sentrino::Application.routes.draw do
 	root :to => "home#index"
 
   match '/users/:user_id/tasks/home' => 'tasks#home'
+  match '/devices/:id/sensor_status' => 'devices#show_sensor_status'
 
   devise_for :users, :path => 'accounts', :skip => [:sessions]
   as :user do
@@ -26,7 +27,4 @@ Sentrino::Application.routes.draw do
 
   match '/settings' => 'home#settings'
   match "/runcron" => "tasks#cron"
-
-  #match '/dashboard' => 'home#dashboard', :as => 'user_root'
-
 end

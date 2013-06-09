@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_filter :is_logged_in?
-  before_filter :find_device, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_device, :only => [:show, :edit, :update, :destroy, :show_sensor_status]
   
   # GET /devices
   def index
@@ -32,9 +32,9 @@ class DevicesController < ApplicationController
     @device = Device.new(params[:device].merge :user_id => current_user[:id])
     if @device.save
       if register_sensors(@device)
-        redirect_to @device, notice: 'Device was successfully created, and its sensors have been automatically registered.' 
+        redirect_to '/', notice: 'Device was successfully created, and its sensors have been automatically registered.' 
       else
-        redirect_to @device, notice: 'Device was successfully created.  We were not able to automatically register sensors for the device.'
+        redirect_to '/', notice: 'Device was successfully created.  We were not able to automatically register sensors for the device.'
       end
     else
       render action: "new" 
@@ -44,7 +44,7 @@ class DevicesController < ApplicationController
   # PUT /devices/1
   def update
     if @device.update_attributes(params[:device])
-      redirect_to @device, notice: 'Device was successfully updated.'
+      redirect_to '/', notice: 'Device was successfully updated.'
     else
       render action: "edit" 
     end
@@ -53,7 +53,11 @@ class DevicesController < ApplicationController
   # DELETE /devices/1
   def destroy
     @device.destroy
-    redirect_to devices_url 
+    redirect_to '/', notice: 'Device was deleted.'
+  end
+
+  def show_sensor_status
+    render :partial => "sensor_status"
   end
   
   private
@@ -76,7 +80,7 @@ class DevicesController < ApplicationController
         reply = device.send(sensortype[:method])
         if reply != "Problem decoding response."
           @sensor = device.sensors.build
-          @sensor[:action_type_id] = sensortype[:id]
+          @sensor[:sensor_type_id] = sensortype[:id]
           @sensor.save
         end
       end
