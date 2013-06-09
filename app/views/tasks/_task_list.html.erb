@@ -1,6 +1,6 @@
 <ul id="task_list">
 	<% @tasks.each do |task| %>
-		<li class="task-list-item" data-id="<%= task.id %>">
+		<li class="task-list-item btn-primary" data-id="<%= task.id %>">
 			<%= task.name %>
 		</li>
 	<% end %>

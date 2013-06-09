@@ -4,3 +4,32 @@
 .task-form {
 	@extend .pretty-form
 }
+
+#task_form{
+	float: left;
+}
+
+.task-list {
+	float: right;
+	width: 360px;
+	padding: 32px;
+	border: 1px solid gray;
+	height: 350px;
+
+	ul {
+		list-style: none;
+
+		li {
+			height: 25px;
+			color: white;
+			text-align: center;
+			border: 1px solid grey;
+			margin-bottom: 4px;
+			
+		}
+
+		li:hover{
+			background-color: #8DB6CD;
+		}
+	}
+}
