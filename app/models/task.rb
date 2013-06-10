@@ -9,4 +9,15 @@ class Task < ActiveRecord::Base
 
   validates :name,  :presence => true
   validates :frequency,  :presence => true
+
+  def all_involved_devices
+  	devices = []
+  	self.task_sensors.each do |sensor|
+  		devices << sensor.device_id
+  	end
+  	self.task_actions.each do |action|
+  		devices << action.device_id
+  	end
+  	devices
+  end
 end

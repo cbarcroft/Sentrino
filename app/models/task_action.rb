@@ -6,4 +6,8 @@ class TaskAction < ActiveRecord::Base
 
   validates :post_action,  :presence => true
   validates :parameters,  :presence => true
+
+  def device_id
+  	self.action.device_id
+  end
 end

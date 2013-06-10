@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_filter :is_logged_in?
-  before_filter :find_device, :only => [:show, :edit, :update, :destroy, :show_sensor_status]
+  before_filter :find_device, :only => [:show, :edit, :update, :destroy, :show_sensor_status, :show_task_status]
   
   # GET /devices
   def index
@@ -58,6 +58,17 @@ class DevicesController < ApplicationController
 
   def show_sensor_status
     render :partial => "sensor_status"
+  end
+
+  def show_task_status
+    @tasks = []
+    current_user.tasks.each do |task|
+      if task.all_involved_devices.include?(params[:id].to_i)
+        @tasks << task
+      end
+    end
+
+    render :partial =>  "task_status"
   end
   
   private

@@ -35,7 +35,9 @@ $(document).ready(function(){
   });
 });
 
-function renderTaskForm(taskId = false){
+function renderTaskForm(taskId){
+  if (taskId === undefined) taskId = false;
+
   if (taskId){
     url = $('#task_form').data('edit-url').replace('?', taskId);
   } else {
