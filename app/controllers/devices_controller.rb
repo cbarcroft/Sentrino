@@ -31,10 +31,10 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(params[:device].merge :user_id => current_user[:id])
     if @device.save
-      if register_sensors(@device)
-        redirect_to '/', notice: 'Device was successfully created, and its sensors have been automatically registered.' 
+      if register_sensors(@device) && register_actions(@device)
+        redirect_to '/', notice: 'Device was successfully created, and its sensors/actions have been automatically registered.' 
       else
-        redirect_to '/', notice: 'Device was successfully created.  We were not able to automatically register sensors for the device.'
+        redirect_to '/', notice: 'Device was successfully created.  We were not able to automatically register sensors/actions for the device.'
       end
     else
       render action: "new" 
@@ -82,6 +82,18 @@ class DevicesController < ApplicationController
           @sensor = device.sensors.build
           @sensor[:sensor_type_id] = sensortype[:id]
           @sensor.save
+        end
+      end
+      return true
+    end
+
+    def register_actions(device)
+      ActionType.all.each do |actiontype|
+        reply = device.send(actiontype[:method])
+        if reply != "Problem decoding response."
+          @action = device.actions.build
+          @action[:action_type_id] = actiontype[:id]
+          @action.save
         end
       end
       return true

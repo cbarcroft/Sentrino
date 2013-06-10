@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 @ChrisB = User.create(
   :email => 'chrisabarcroft@gmail.com',
   :password => 'testpass',
@@ -29,7 +21,8 @@
 @HomeDevice.save
 
 # Action Types
-ActionType.create(:name => "Light", :method => "light") unless ActionType.where('name = ?', ["Light"]).first
+ActionType.create(:name => "Beep", :method => "beep") unless ActionType.where('name = ?', ["Beep"]).first
+ActionType.create(:name => "Light", :method => "lght") unless ActionType.where('name = ?', ["Light"]).first
 
 # Sensor Types
 SensorType.create(:name => "Status", :method => "status") unless SensorType.where('name = ?', ["Status"]).first
@@ -37,6 +30,7 @@ SensorType.create(:name => "Temperature", :method => "temp") unless SensorType.w
 SensorType.create(:name => "Humidity", :method => "humidity") unless SensorType.where('name = ?', ["Humidity"]).first
 
 #Associate Action Types to Devices
+@ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Beep'").first.id).save
 @ChrisDevice.actions.build(:action_type_id => ActionType.where("name = 'Light'").first.id).save
 
 @ChrisDevice.sensors.build(:sensor_type_id => SensorType.where("name = 'Status'").first.id).save

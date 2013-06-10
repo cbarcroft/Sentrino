@@ -5,7 +5,6 @@ class Action < ActiveRecord::Base
  	attr_accessible :action_type_id, :device_id
 
  	def combined_name
- 		#self.device.nickname + " | " + self.action_type.name
- 		"test"
+ 		self.device.nickname + " | " + self.action_type.name
  	end
 end

@@ -22,6 +22,7 @@ class Device < ActiveRecord::Base
 
   # Methods related to actual device communications below
 
+  #Sensors
   def status
     response = communicateWithDevice("ping");
     if response
@@ -49,12 +50,33 @@ class Device < ActiveRecord::Base
     end
   end
 
+  #Actions
+  def beep
+    response = communicateWithDevice("beep");
+    if response
+      response["err"] ? UNSUPPORTED_METHOD_MESSAGE : true;
+    else
+      return PARSE_ERROR_MESSAGE
+    end
+  end
+
+  def light(duration = 5)
+    response = communicateWithDevice("lght", duration);
+    if response
+      response["err"] ? UNSUPPORTED_METHOD_MESSAGE : true;
+    else
+      return PARSE_ERROR_MESSAGE
+    end
+  end
+
   private
-    def communicateWithDevice(method)
-      #return false # Enable this to avoid device timeouts if it is acting up
+    def communicateWithDevice(method, args = nil)
       begin
-        p "Fetching http://#{self.ip}:#{self.port || '80'}/$$#{method}"
-        response = JSON.parse(HTTParty.get("http://#{self.ip}:#{self.port || '80'}/$$#{method}", {:timeout => 5000}));
+        url = "http://#{self.ip}:#{self.port || '80'}/$$#{method}"
+        if args then url += "/%%#{args}" end
+
+        p "Fetching #{url}"
+        response = JSON.parse(HTTParty.get(url, {:timeout => 5000}));
         return false unless response
         return response["error"] if response["error"]["err"] == true
 	      return response["body"]

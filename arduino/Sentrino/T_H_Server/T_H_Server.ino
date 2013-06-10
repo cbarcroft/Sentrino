@@ -16,7 +16,7 @@ byte mac[] = {
   0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };
 // assign an IP address for the controller:
 IPAddress ip(192,168,0,105);
-IPAddress gateway(192,168,0,1); 
+IPAddress gateway(192,168,0,1);	
 IPAddress subnet(255, 255, 255, 0);
 
 
@@ -107,6 +107,12 @@ void listenForEthernetClients() {
           if(strcmp(__command, "hmdy") == 0){
             response = hmdy();
           }
+          if(strcmp(__command, "beep") == 0){
+            response = beep();
+          }
+          if(strcmp(__command, "lght") == 0){
+            response = lght();
+          }
         }
         
         
@@ -174,6 +180,18 @@ String hmdy() //humidity
   return hmdy_response;
 }
 
+String lght() //Light
+{
+  String lght_response = "{\"error\":{\"err\":false},\"body\":{\"lght\":true}}";
+  return lght_response;
+}
+
+String beep() //Light
+{
+  String beep_response = "{\"error\":{\"err\":false},\"body\":{\"beep\":true}}";
+  return beep_response;
+}
+
 int freeRam () {
   extern int __heap_start, *__brkval; 
   int v; 
@@ -184,7 +202,18 @@ void printStatus(){
   lcd.setCursor(0, 0);
   lcd.print(Celcius2Fahrenheit(temperature));
   lcd.print(" F");
+  
   lcd.setCursor(12, 0);
+    
+  if (photocellReading < 100)
+  {
+    lcd.print(" ");
+    if (photocellReading < 10)
+    {
+      lcd.print(" ");
+    }
+  }
+  
   lcd.print(photocellReading);
   lcd.print("L");
   
