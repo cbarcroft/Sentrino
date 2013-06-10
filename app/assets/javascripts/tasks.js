@@ -19,19 +19,19 @@ $(document).ready(function(){
     event.preventDefault();
   });
 
-  $('body').on('click', '.task-list-item', function(event){
-    renderTaskForm($(this).data('id'));
+  $('body').on('click', '#task_submit', function(){
+    form = $(this).parents('form');
+    $.post(
+          form.attr('action'),
+          form.serialize(),
+          function(data, textStatus, jqXHR){
+            renderTaskList();
+          }
+        );
   });
 
-  $('#new_task').submit(function(){
-    $.post(
-      $(this).attr('action'),
-      $(this).serialize(),
-      function(data, textStatus, jqXHR){
-        renderTaskList();
-      }
-    );
-    return false;
+  $('body').on('click', '.task-list-item', function(event){
+    renderTaskForm($(this).data('id'));
   });
 });
 
